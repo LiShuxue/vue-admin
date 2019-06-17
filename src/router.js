@@ -25,14 +25,18 @@ const router = new Router({
       redirect: '/home'
     },
     {
-      path: '/home',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
+      children: [
+        { path: '/intro', name: 'intro', component: () => import((/* webpackChunkName: "intro" */ './views/Intro.vue')) },
+        { path: '/dashboard', name: 'dashboard', component: () => import((/* webpackChunkName: "dashboard" */ './views/Dashboard.vue')) }
+      ]
     }
   ]
 })
