@@ -68,7 +68,7 @@ export default {
     max-width: 400px;
     max-height: 400px;
     margin: 180px auto;
-    padding: 30px 40px 30px 30px;
+    padding: 30px;
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #eaeaea;
