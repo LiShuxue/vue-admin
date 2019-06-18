@@ -157,6 +157,7 @@ export default {
       bottom: 20px;
       right: 20px;
       background: #fff;
+      overflow: scroll;
     }
   }
 }
