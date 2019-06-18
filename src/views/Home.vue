@@ -1,8 +1,8 @@
 <template>
   <div class="home">
+
     <div class="header">
       <div :class="isCollapse?'menu-header-fold':'menu-header-unfold'">XXX管理系统</div>
-
       <div class="container-header">
         <div class="fold-icon" @click="foldMenu">
           <i v-show="isCollapse" class="el-icon-s-unfold"></i>
@@ -11,35 +11,39 @@
       </div>
     </div>
 
-    <el-menu default-active="1" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
-      <el-menu-item index="intro">
-        <i class="el-icon-s-home"></i>
-        <span slot="title">系统简介</span>
-      </el-menu-item>
-      <el-menu-item index="dashboard">
-        <i class="el-icon-s-data"></i>
-        <span slot="title">图表面板</span>
-      </el-menu-item>
-      <el-menu-item index="adminList">
-        <i class="el-icon-s-custom"></i>
-        <span slot="title">管理员列表</span>
-      </el-menu-item>
-      <el-menu-item index="userList">
-        <i class="el-icon-user"></i>
-        <span slot="title">用户管理</span>
-      </el-menu-item>
-      <el-menu-item index="input">
-        <i class="el-icon-edit"></i>
-        <span slot="title">表单输入</span>
-      </el-menu-item>
-      <el-menu-item index="edit">
-        <i class="el-icon-edit-outline"></i>
-        <span slot="title">文本编辑</span>
-      </el-menu-item>
-    </el-menu>
-
     <div class="container">
-      <router-view/>
+      <el-menu default-active="1" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
+        <el-menu-item index="intro">
+          <i class="el-icon-s-home"></i>
+          <span slot="title">系统简介</span>
+        </el-menu-item>
+        <el-menu-item index="dashboard">
+          <i class="el-icon-s-data"></i>
+          <span slot="title">图表面板</span>
+        </el-menu-item>
+        <el-menu-item index="adminList">
+          <i class="el-icon-s-custom"></i>
+          <span slot="title">管理员列表</span>
+        </el-menu-item>
+        <el-menu-item index="userList">
+          <i class="el-icon-user"></i>
+          <span slot="title">用户管理</span>
+        </el-menu-item>
+        <el-menu-item index="input">
+          <i class="el-icon-edit"></i>
+          <span slot="title">表单输入</span>
+        </el-menu-item>
+        <el-menu-item index="edit">
+          <i class="el-icon-edit-outline"></i>
+          <span slot="title">文本编辑</span>
+        </el-menu-item>
+      </el-menu>
+
+      <div :class="isCollapse?'container-fold':'container-unfold'">
+        <div class="container-wrapper">
+          <router-view/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -70,7 +74,8 @@ export default {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 
   .header {
     width: 100%;
@@ -111,28 +116,48 @@ export default {
     }
   }
 
-  .menu-bar{
-    height: calc(100vh - 60px);
-
-    .el-menu-item [class^=el-icon-] {
-      margin-right: 15px;
-    }
-
-    .el-menu-item {
-      overflow: hidden;
-    }
-  }
-  .menu-bar:not(.el-menu--collapse) {
-    width: 14vw;
-  }
-
   .container{
-    position: absolute;
-    top: 60px;
-    left: 14vw;
-    width: 86vw;
-    height: calc(100vh - 60px);
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
+
+    .menu-bar{
+      height: calc(100vh - 60px);
+      .el-menu-item [class^=el-icon-] {
+        margin-right: 15px;
+      }
+      .el-menu-item {
+        overflow: hidden;
+      }
+    }
+    .menu-bar:not(.el-menu--collapse) {
+      width: 14vw;
+    }
+
+    .container-unfold{
+      position: relative;
+      box-sizing: border-box;
+      width: 86vw;
+      padding: 20px;
+      background: #f1f4f5;
+      transition: all .4s;
+    }
+    .container-fold{
+      position: relative;
+      box-sizing: border-box;
+      width: calc(100vw - 65px);
+      padding: 20px;
+      background: #f1f4f5;
+      transition: all .4s;
+    }
+
+    .container-wrapper{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+    }
   }
 }
 </style>
