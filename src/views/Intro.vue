@@ -7,8 +7,8 @@
     <div class="intro-content">
       <h3>技术架构</h3>
       <ul>
-        <li><p>页面结构参考了vue-admin/vue-element-admin/renren-fast-vue</p></li>
-        <li><p>技术采用了vue + vue-router + vuex + elemnt</p></li>
+        <li><p>页面结构参考了vue-admin / vue-element-admin / renren-fast-vue</p></li>
+        <li><p>技术采用了vue + vue-router + vuex + element</p></li>
       </ul>
       <br/>
 
