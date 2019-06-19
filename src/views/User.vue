@@ -1,12 +1,12 @@
 <template>
-  <div class="admin">
+  <div class="user">
     <!-- 工具条 -->
     <el-form :inline="true" :model="filterForm">
       <el-form-item>
         <el-input v-model="filterForm.name" placeholder="用户名"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="queryAdmin">查询</el-button>
+        <el-button @click="queryUsers">查询</el-button>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="showAddForm">新增</el-button>
@@ -21,6 +21,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="id" label="ID" width="100" align="center"></el-table-column>
       <el-table-column prop="name" label="用户名" width="200" align="center"></el-table-column>
+      <el-table-column prop="role" label="角色" width="200" align="center"></el-table-column>
       <el-table-column prop="phone" label="联系方式" width="200" align="center"></el-table-column>
       <el-table-column prop="date" label="创建时间" width="200" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
@@ -45,10 +46,17 @@
     </div>
 
     <!-- 新增页面 -->
-    <el-dialog title="新增管理员" :visible.sync="addFormVisible" :close-on-click-modal="false">
+    <el-dialog title="新增用户" :visible.sync="addFormVisible" :close-on-click-modal="false">
       <el-form :model="addForm" label-width="80px">
         <el-form-item label="用户名" prop="name">
           <el-input v-model="addForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="角色" prop="role">
+          <el-radio-group v-model="addForm.role">
+            <el-radio label="普通用户">普通用户</el-radio>
+            <el-radio label="VIP用户">VIP用户</el-radio>
+            <el-radio label="低级用户">低级用户</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="联系方式" prop="phone">
           <el-input v-model="addForm.phone"></el-input>
@@ -59,15 +67,22 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="closeAddForm">取 消</el-button>
-        <el-button type="primary" @click="addAdmin">确 定</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
       </div>
     </el-dialog>
 
     <!-- 编辑页面 -->
-    <el-dialog title="编辑管理员" :visible.sync="editFormVisible" :close-on-click-modal="false">
+    <el-dialog title="编辑用户" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form :model="editForm" label-width="80px">
         <el-form-item label="用户名" prop="name">
           <el-input v-model="editForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="角色" prop="role">
+          <el-radio-group v-model="editForm.role">
+            <el-radio label="普通用户">普通用户</el-radio>
+            <el-radio label="VIP用户">VIP用户</el-radio>
+            <el-radio label="低级用户">低级用户</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="联系方式" prop="phone">
           <el-input v-model="editForm.phone"></el-input>
@@ -78,7 +93,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="closeEditForm">取 消</el-button>
-        <el-button type="primary" @click="editAdmin">确 定</el-button>
+        <el-button type="primary" @click="editUser">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -93,11 +108,13 @@ export default {
       },
       addForm: {
         name: '',
+        role: '',
         phone: '',
         date: ''
       },
       editForm: {
         name: '',
+        role: '',
         phone: '',
         date: ''
       },
@@ -117,7 +134,8 @@ export default {
     for (let i = 1; i <= 100; i++) {
       mockTableData.push({
         id: i,
-        name: '张三' + i,
+        name: '李四' + i,
+        role: i % 2 === 0 ? '普通用户' : 'VIP用户',
         phone: '13112213445',
         date: '2016-05-02'
       })
@@ -131,7 +149,7 @@ export default {
 
   methods: {
     // 查询用户
-    queryAdmin() {
+    queryUsers() {
       console.log(this.filterForm.name)
       let arr = this.tableData.filter((value, index) =>{
         return value.name === this.filterForm.name
@@ -145,6 +163,7 @@ export default {
       this.addFormVisible = true
       this.addForm = {
         name: '',
+        role: '普通用户',
         phone: '',
         date: ''
       }
@@ -155,8 +174,8 @@ export default {
       this.addFormVisible = false
     },
     // 点击确定，增加用户
-    addAdmin() {
-      console.log('add Admin')
+    addUser() {
+      console.log('add user')
       console.log(this.addForm)
       this.$confirm('确认提交吗？', '提示', {}).then(() => {
         let id = this.tableData[this.tableData.length - 1].id
@@ -190,6 +209,7 @@ export default {
       console.log(row)
       this.editForm = {
         name: '',
+        role: '',
         phone: '',
         date: ''
       }
@@ -202,8 +222,8 @@ export default {
       this.editFormVisible = false
     },
     // 编辑以后点击确定
-    editAdmin() {
-      console.log('edit Admin')
+    editUser() {
+      console.log('edit user')
       this.$confirm('确认提交吗？', '提示', {}).then(() => {
         let idArr = this.tableData.map((value) => {
           return value.id
@@ -248,7 +268,7 @@ export default {
 </script>
 
 <style lang="scss">
-.admin {
+.user {
   padding: 20px;
 
   .pagination{
