@@ -33,7 +33,7 @@
           <i class="el-icon-edit"></i>
           <span slot="title">表单输入</span>
         </el-menu-item>
-        <el-menu-item index="edit">
+        <el-menu-item index="editor">
           <i class="el-icon-edit-outline"></i>
           <span slot="title">文本编辑</span>
         </el-menu-item>
