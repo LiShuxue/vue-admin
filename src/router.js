@@ -37,7 +37,8 @@ const router = new Router({
       children: [
         { path: '/intro', name: 'intro', component: () => import((/* webpackChunkName: "intro" */ './views/Intro.vue')) },
         { path: '/dashboard', name: 'dashboard', component: () => import((/* webpackChunkName: "dashboard" */ './views/Dashboard.vue')) },
-        { path: '/admin', name: 'admin', component: () => import((/* webpackChunkName: "admin" */ './views/Admin.vue')) }
+        { path: '/admin', name: 'admin', component: () => import((/* webpackChunkName: "admin" */ './views/Admin.vue')) },
+        { path: '/user', name: 'user', component: () => import((/* webpackChunkName: "user" */ './views/User.vue')) }
       ]
     }
   ]
