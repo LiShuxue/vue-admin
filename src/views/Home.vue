@@ -12,7 +12,7 @@
     </div>
 
     <div class="container">
-      <el-menu default-active="1" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
+      <el-menu default-active="intro" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
         <el-menu-item index="intro">
           <i class="el-icon-s-home"></i>
           <span slot="title">系统简介</span>
@@ -21,11 +21,11 @@
           <i class="el-icon-s-data"></i>
           <span slot="title">图表面板</span>
         </el-menu-item>
-        <el-menu-item index="adminList">
+        <el-menu-item index="admin">
           <i class="el-icon-s-custom"></i>
           <span slot="title">管理员列表</span>
         </el-menu-item>
-        <el-menu-item index="userList">
+        <el-menu-item index="user">
           <i class="el-icon-user"></i>
           <span slot="title">用户管理</span>
         </el-menu-item>
