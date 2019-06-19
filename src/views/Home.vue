@@ -2,12 +2,22 @@
   <div class="home">
 
     <div class="header">
-      <div :class="isCollapse?'menu-header-fold':'menu-header-unfold'">XXX管理系统</div>
-      <div class="container-header">
-        <div class="fold-icon" @click="foldMenu">
-          <i v-show="isCollapse" class="el-icon-s-unfold"></i>
-          <i v-show="!isCollapse" class="el-icon-s-fold"></i>
-        </div>
+      <div :class="isCollapse?'system-title-fold':'system-title-unfold'">XXX管理系统</div>
+      <div class="fold-icon" @click="foldMenu">
+        <i v-show="isCollapse" class="el-icon-s-unfold"></i>
+        <i v-show="!isCollapse" class="el-icon-s-fold"></i>
+      </div>
+      <div class="admin-icon">
+        <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">
+            <span class="username">{{this.$store.state.username}}</span>
+            <img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0s9z66ra9j305k05k3yj.jpg"/>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="login">个人中心</el-dropdown-item>
+            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
 
@@ -63,6 +73,16 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
       this.$router.push(key)
+    },
+
+    handleCommand(command) {
+      if (command === 'logout') {
+        this.$store.dispatch('saveAccessTokenAction', '')
+        this.$store.dispatch('saveRefreshTokenAction', '')
+        this.$store.dispatch('saveUsernameAction', '')
+
+        this.$router.push('/login')
+      }
     }
   }
 }
@@ -84,7 +104,7 @@ export default {
     display: flex;
     flex-direction: row;
 
-    .menu-header-fold {
+    .system-title-fold {
       line-height: 60px;
       border-right: solid 1px white;
       box-sizing: border-box;
@@ -94,7 +114,7 @@ export default {
       transition: all .4s;
     }
 
-    .menu-header-unfold {
+    .system-title-unfold {
       line-height: 60px;
       border-right: solid 1px white;
       box-sizing: border-box;
@@ -104,14 +124,29 @@ export default {
       transition: all .4s;
     }
 
-    .container-header {
+    .fold-icon {
       line-height: 60px;
-      height: 100%;
+      padding: 0 15px;
+      color: white;
+      font-size: 1.5em;
+      width: 30px;
+    }
 
-      .fold-icon {
-        padding: 0 15px;
-        color: white;
-        font-size: 1.5em;
+    .admin-icon{
+      position: absolute;
+      right: 30px;
+      height: 60px;
+      line-height: 60px;
+      .username{
+        position: relative;
+        top: -25px;
+        right: 10px;
+        color: #fff;
+      }
+      img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
       }
     }
   }
