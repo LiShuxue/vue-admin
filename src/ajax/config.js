@@ -10,7 +10,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 axios.interceptors.request.use(config => {
   for (let key in API.requireAuth) {
     // 需要携带token
-    if (config.url.includes(API.requireAuth[key])) {
+    if (config.url.includes(API.requireAuth[key].url)) {
       config.headers.Authorization = `Bearer ${store.state.token}`
     }
   }
