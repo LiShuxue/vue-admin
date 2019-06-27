@@ -19,6 +19,9 @@
 </template>
 
 <script>
+import API from '@/ajax/api.js'
+import SHA256 from 'crypto-js/sha256'
+
 export default {
   data() {
     return {
@@ -41,20 +44,23 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          console.log(this.loginForm.username)
-          console.log(this.loginForm.password)
+          this.axios.post(API.notRequireAuth.login, {
+            username: this.loginForm.username,
+            password: SHA256(this.loginForm.password).toString()
+          }).then(response => {
+            this.$message.success(response.data.msg)
+            this.$store.dispatch('login', response.data)
 
-          this.$store.dispatch('saveAccessTokenAction', 'access_token-*****************')
-          this.$store.dispatch('saveRefreshTokenAction', 'refresh_token-*****************')
-          this.$store.dispatch('saveUsernameAction', this.loginForm.username)
-
-          // 根据传过来的参数，跳到不同的页面
-          let redirect = decodeURIComponent(this.$route.query.redirect)
-          if (redirect !== 'undefined') {
-            this.$router.push(redirect)
-          } else {
-            this.$router.push('/home')
-          }
+            // 根据传过来的参数，跳到不同的页面
+            let redirect = decodeURIComponent(this.$route.query.redirect)
+            if (redirect !== 'undefined') {
+              this.$router.push(redirect)
+            } else {
+              this.$router.push('/home')
+            }
+          }).catch(err => {
+            err && this.$message.error(err.data.msg)
+          })
         }
       })
     }

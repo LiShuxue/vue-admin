@@ -5,34 +5,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    username: '',
-    access_token: '',
-    refresh_token: ''
+    token: '',
+    username: ''
   },
+
   getters: { },
+
   mutations: {
-    saveAccessTokenMutation (state, token) {
-      state.access_token = token
+    saveToken (state, token) {
+      state.token = token
+      sessionStorage.setItem('token', token)
     },
-    saveRefreshTokenMutation (state, token) {
-      state.refresh_token = token
-    },
-    saveUsernameMutation (state, username) {
+    saveUsername (state, username) {
       state.username = username
+      sessionStorage.setItem('username', username)
     }
   },
+
   actions: {
-    saveAccessTokenAction ({ commit }, payload) {
-      sessionStorage.setItem('access_token', payload)
-      commit('saveAccessTokenMutation', payload)
+    login ({ commit }, payload) {
+      commit('saveToken', payload.token)
+      commit('saveUsername', payload.username)
     },
-    saveRefreshTokenAction ({ commit }, payload) {
-      sessionStorage.setItem('refresh_token', payload)
-      commit('saveRefreshTokenMutation', payload)
-    },
-    saveUsernameAction ({ commit }, payload) {
-      sessionStorage.setItem('username', payload)
-      commit('saveUsernameMutation', payload)
+    logout ({ commit }) {
+      commit('saveToken', '')
+      commit('saveUsername', '')
     }
   }
 })
