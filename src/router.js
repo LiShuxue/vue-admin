@@ -6,14 +6,11 @@ Vue.use(Router)
 
 // 页面刷新时，重新赋值token 和 username。保证页面刷新之后不用重新登陆，只有关闭页面再打开才需要重新登录
 if (window.sessionStorage) {
-  if (window.sessionStorage.getItem('access_token')) {
-    store.commit('saveAccessTokenMutation', window.sessionStorage.getItem('access_token'))
-  }
-  if (window.sessionStorage.getItem('refresh_token')) {
-    store.commit('saveRefreshTokenMutation', window.sessionStorage.getItem('refresh_token'))
+  if (window.sessionStorage.getItem('token')) {
+    store.commit('saveToken', window.sessionStorage.getItem('token'))
   }
   if (window.sessionStorage.getItem('username')) {
-    store.commit('saveUsernameMutation', window.sessionStorage.getItem('username'))
+    store.commit('saveUsername', window.sessionStorage.getItem('username'))
   }
 }
 
@@ -47,7 +44,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if(store.state.access_token || sessionStorage.getItem('access_token')) {
+  if(store.state.token) {
     if(to.name === 'login') {
       next({ path: '/home' })
     } else {

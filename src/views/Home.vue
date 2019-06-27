@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import API from '@/ajax/api.js'
+
 export default {
   data() {
     return {
@@ -77,11 +79,13 @@ export default {
 
     handleCommand(command) {
       if (command === 'logout') {
-        this.$store.dispatch('saveAccessTokenAction', '')
-        this.$store.dispatch('saveRefreshTokenAction', '')
-        this.$store.dispatch('saveUsernameAction', '')
-
-        this.$router.push('/login')
+        this.axios.post(API.requireAuth.logout).then(response => {
+          this.$message.success(response.data.msg)
+          this.$store.dispatch('logout')
+          this.$router.push('/login')
+        }).catch(err => {
+          err && this.$message.error(err.data.msg)
+        })
       }
     }
   }
