@@ -44,9 +44,13 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          this.axios.post(API.notRequireAuth.login, {
-            username: this.loginForm.username,
-            password: SHA256(this.loginForm.password).toString()
+          this.axios({
+            method: API.notRequireAuth.login.type,
+            url: API.notRequireAuth.login.url,
+            data: {
+              username: this.loginForm.username,
+              password: SHA256(this.loginForm.password).toString()
+            }
           }).then(response => {
             this.$message.success(response.data.msg)
             this.$store.dispatch('login', response.data)

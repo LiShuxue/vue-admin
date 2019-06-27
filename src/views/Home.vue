@@ -79,7 +79,10 @@ export default {
 
     handleCommand(command) {
       if (command === 'logout') {
-        this.axios.post(API.requireAuth.logout).then(response => {
+        this.axios({
+          method: API.requireAuth.logout.type,
+          url: API.requireAuth.logout.url
+        }).then(response => {
           this.$message.success(response.data.msg)
           this.$store.dispatch('logout')
           this.$router.push('/login')

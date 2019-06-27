@@ -1,10 +1,11 @@
-const Mock = require('mockjs')
+import Mock from 'mockjs'
+import API from '@/ajax/api'
 const Random = Mock.Random
 
 // 登录
 const login = {
-  url: '/public/login',
-  type: 'post',
+  url: API.notRequireAuth.login.url,
+  type: API.notRequireAuth.login.type,
   data: {
     'msg': 'success',
     'code': 1,
@@ -16,8 +17,8 @@ const login = {
 
 // 退出
 const logout = {
-  url: '/private/logout',
-  type: 'post',
+  url: API.requireAuth.logout.url,
+  type: API.requireAuth.logout.type,
   data: {
     'msg': 'success',
     'code': 1

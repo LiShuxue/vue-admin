@@ -1,9 +1,9 @@
 // require auth api call
-const list = 'private/list'
-const logout = 'private/logout'
+const list = { type: 'get', url: '/private/list' }
+const logout = { type: 'post', url: '/private/logout' }
 
 // not require auth api call
-const login = 'public/login'
+const login = { type: 'post', url: '/public/login' }
 
 export default {
   requireAuth: {

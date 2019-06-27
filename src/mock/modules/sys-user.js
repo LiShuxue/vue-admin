@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+import API from '@/ajax/api'
 const Random = Mock.Random
 
 var dataList = []
@@ -17,8 +18,8 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
 }
 
 const list = {
-  url: '/private/list',
-  type: 'get',
+  url: API.requireAuth.list.url,
+  type: API.requireAuth.list.type,
   data: dataList
 }
 
