@@ -12,7 +12,7 @@ import 'normalize.css'
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.VUE_APP_ENV === 'mock') {
   require('@/mock')
 }
 

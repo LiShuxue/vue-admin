@@ -4,7 +4,7 @@ import store from '@/store'
 import router from '@/router'
 
 axios.defaults.timeout = 20 * 1000
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'http://129.28.106.104:8000' : 'http://localhost:5000'
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 
 axios.interceptors.request.use(config => {
