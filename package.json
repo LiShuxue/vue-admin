@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "mock": "vue-cli-service serve --mode mock",
+    "sit": "vue-cli-service serve --mode sit",
+    "prod": "vue-cli-service serve --mode prod",
+    "build-mock": "vue-cli-service build --mode mock",
+    "build-sit": "vue-cli-service build --mode sit",
+    "build-prod": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
-    "start": "yarn lint && yarn serve"
+    "start-mock": "yarn lint && yarn mock",
+    "start-sit": "yarn lint && yarn sit"
   },
   "dependencies": {
     "axios": "^0.19.0",
