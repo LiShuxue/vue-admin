@@ -24,35 +24,35 @@
     <div class="container">
       <el-menu default-active="intro" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
         <el-menu-item index="intro">
-          <i class="el-icon-s-home"></i>
+          <i class="iconfont icon-home"></i>
           <span slot="title">系统简介</span>
         </el-menu-item>
         <el-menu-item index="dashboard">
-          <i class="el-icon-s-data"></i>
+          <i class="iconfont icon-dashboard"></i>
           <span slot="title">图表面板</span>
         </el-menu-item>
         <el-submenu index="">
           <template slot="title">
-            <i class="el-icon-menu"></i>
+            <i class="iconfont icon-store"></i>
             <span>父级菜单</span>
           </template>
           <el-menu-item index="admin">子菜单1</el-menu-item>
           <el-menu-item index="user">子菜单2</el-menu-item>
         </el-submenu>
         <el-menu-item index="admin">
-          <i class="el-icon-s-custom"></i>
+          <i class="iconfont icon-admin"></i>
           <span slot="title">管理员列表</span>
         </el-menu-item>
         <el-menu-item index="user">
-          <i class="el-icon-user"></i>
+          <i class="iconfont icon-user"></i>
           <span slot="title">用户管理</span>
         </el-menu-item>
         <el-menu-item index="input">
-          <i class="el-icon-edit"></i>
+          <i class="iconfont icon-form"></i>
           <span slot="title">表单输入</span>
         </el-menu-item>
         <el-menu-item index="editor">
-          <i class="el-icon-edit-outline"></i>
+          <i class="iconfont icon-edit"></i>
           <span slot="title">文本编辑</span>
         </el-menu-item>
       </el-menu>
@@ -87,15 +87,21 @@ export default {
 
     handleCommand(command) {
       if (command === 'logout') {
-        this.axios({
-          method: API.requireAuth.logout.type,
-          url: API.requireAuth.logout.url
-        }).then(response => {
-          this.$message.success(response.data.msg)
-          this.$store.dispatch('logout')
-          this.$router.push('/login')
-        }).catch(err => {
-          err && this.$message.error(err.data.msg)
+        this.$confirm(`确定进行[退出]操作?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios({
+            method: API.requireAuth.logout.type,
+            url: API.requireAuth.logout.url
+          }).then(response => {
+            this.$message.success(response.data.msg)
+            this.$store.dispatch('logout')
+            this.$router.push('/login')
+          }).catch(err => {
+            err && this.$message.error(err.data.msg)
+          })
         })
       }
     }
@@ -172,7 +178,7 @@ export default {
 
     .menu-bar{
       height: calc(100vh - 60px);
-      .el-menu-item [class^=el-icon-], .el-submenu [class^=el-icon-] {
+      .iconfont {
         margin-right: 15px;
       }
       .el-menu-item {
