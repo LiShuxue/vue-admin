@@ -155,6 +155,7 @@ export default {
         return value.name === this.filterForm.name
       })
       this.tableData = arr
+      this.totalItem = arr.length
     },
 
     // 点击新增按钮，显示Form表单

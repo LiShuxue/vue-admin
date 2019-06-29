@@ -31,6 +31,14 @@
           <i class="el-icon-s-data"></i>
           <span slot="title">图表面板</span>
         </el-menu-item>
+        <el-submenu index="">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span>父级菜单</span>
+          </template>
+          <el-menu-item index="admin">子菜单1</el-menu-item>
+          <el-menu-item index="user">子菜单2</el-menu-item>
+        </el-submenu>
         <el-menu-item index="admin">
           <i class="el-icon-s-custom"></i>
           <span slot="title">管理员列表</span>
@@ -65,11 +73,11 @@ export default {
   data() {
     return {
       isCollapse: false
-    };
+    }
   },
   methods: {
     foldMenu() {
-      this.isCollapse = !this.isCollapse;
+      this.isCollapse = !this.isCollapse
     },
 
     handleSelect(key, keyPath) {
@@ -164,7 +172,7 @@ export default {
 
     .menu-bar{
       height: calc(100vh - 60px);
-      .el-menu-item [class^=el-icon-] {
+      .el-menu-item [class^=el-icon-], .el-submenu [class^=el-icon-] {
         margin-right: 15px;
       }
       .el-menu-item {
