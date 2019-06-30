@@ -33,17 +33,27 @@ export default {
     drawColumnChart() {
       this.chartColumn = echarts.init(document.getElementById('chartColumn'));
       this.chartColumn.setOption({
-        title: { text: 'Column Chart' },
+        title: { text: 'Order Chart' },
         tooltip: {},
         xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+          name: '月份',
+          data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
         },
-        yAxis: {},
+        yAxis: {
+          name: '订单数'
+        },
+        dataZoom: [
+          { // 控制x轴 平移。
+            type: 'inside',
+            start: 0,
+            end: 50
+          }
+        ],
         series: [
           {
-            name: '销量',
+            name: '订单数',
             type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
+            data: [5, 20, 36, 10, 10, 20, 5, 20, 36, 10, 10, 20]
           }
         ]
       });
