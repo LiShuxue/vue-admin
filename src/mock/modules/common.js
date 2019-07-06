@@ -11,7 +11,8 @@ const login = {
     'code': 1,
     'expire': Random.natural(60 * 60 * 1, 60 * 60 * 12),
     'token': Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
-    'username': Random.name()
+    'username': Random.name(),
+    'roles': ['admin']
   }
 }
 
