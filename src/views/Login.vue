@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import API from '@/ajax/api.js'
+import { userLogin } from '@/ajax/api.js'
 import SHA256 from 'crypto-js/sha256'
 import { getUUID } from '@/utils'
 
@@ -70,16 +70,13 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
-          this.axios({
-            method: API.notRequireAuth.login.type,
-            url: API.notRequireAuth.login.url,
-            data: {
-              username: this.loginForm.username,
-              password: SHA256(this.loginForm.password).toString(),
-              captcha: this.loginForm.captcha,
-              uuid: this.loginForm.uuid
-            }
-          }).then(response => {
+          let data = {
+            username: this.loginForm.username,
+            password: SHA256(this.loginForm.password).toString(),
+            captcha: this.loginForm.captcha,
+            uuid: this.loginForm.uuid
+          }
+          userLogin(data).then(response => {
             this.$message.success(response.data.msg)
             this.$store.dispatch('login', response.data)
 
