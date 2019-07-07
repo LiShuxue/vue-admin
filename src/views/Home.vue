@@ -21,41 +21,8 @@
       </div>
     </div>
 
-    <div class="container">
-      <el-menu default-active="intro" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
-        <el-menu-item index="intro">
-          <i class="iconfont icon-home"></i>
-          <span slot="title">系统简介</span>
-        </el-menu-item>
-        <el-menu-item index="dashboard">
-          <i class="iconfont icon-dashboard"></i>
-          <span slot="title">图表面板</span>
-        </el-menu-item>
-        <el-submenu index="">
-          <template slot="title">
-            <i class="iconfont icon-store"></i>
-            <span>父级菜单</span>
-          </template>
-          <el-menu-item index="admin">子菜单1</el-menu-item>
-          <el-menu-item index="user">子菜单2</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="admin">
-          <i class="iconfont icon-admin"></i>
-          <span slot="title">管理员列表</span>
-        </el-menu-item>
-        <el-menu-item index="user">
-          <i class="iconfont icon-user"></i>
-          <span slot="title">用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="input">
-          <i class="iconfont icon-form"></i>
-          <span slot="title">表单输入</span>
-        </el-menu-item>
-        <el-menu-item index="editor">
-          <i class="iconfont icon-edit"></i>
-          <span slot="title">文本编辑</span>
-        </el-menu-item>
-      </el-menu>
+    <div class="content">
+      <side-bar :isCollapse="isCollapse"></side-bar>
 
       <div :class="isCollapse?'container-fold':'container-unfold'">
         <div class="container-wrapper">
@@ -68,6 +35,7 @@
 
 <script>
 import API from '@/ajax/api.js'
+import SideBar from '@/components/SideBar'
 
 export default {
   data() {
@@ -75,14 +43,14 @@ export default {
       isCollapse: false
     }
   },
+
+  components: {
+    SideBar
+  },
+
   methods: {
     foldMenu() {
       this.isCollapse = !this.isCollapse
-    },
-
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-      this.$router.push(key)
     },
 
     handleCommand(command) {
@@ -172,22 +140,9 @@ export default {
     }
   }
 
-  .container{
+  .content{
     display: flex;
     flex-direction: row;
-
-    .menu-bar{
-      height: calc(100vh - 60px);
-      .iconfont {
-        margin-right: 15px;
-      }
-      .el-menu-item {
-        overflow: hidden;
-      }
-    }
-    .menu-bar:not(.el-menu--collapse) {
-      width: 14vw;
-    }
 
     .container-unfold{
       position: relative;

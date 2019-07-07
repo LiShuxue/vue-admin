@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     token: '',
     username: '',
-    userRoles: []
+    userRoles: [],
+    dynamicRoutes: []
   },
 
   getters: { },
@@ -26,6 +27,9 @@ export default new Vuex.Store({
       state.userRoles = roles
       // session storage 不能存数组，只能存字符串。所以用+拼接数组的内容存起来，解析的时候再把它转换成数组
       sessionStorage.setItem('userRoles', roles.join('+'))
+    },
+    saveDynamicRoutes (state, routes) {
+      state.dynamicRoutes = routes
     }
   },
 

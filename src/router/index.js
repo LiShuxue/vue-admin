@@ -61,6 +61,7 @@ router.beforeEach((to, from, next) => {
 const addDynamicRoute = () => {
   let routes = dynamicRoutes()
   router.addRoutes(routes)
+  store.commit('saveDynamicRoutes', routes)
   router.options.isAddDynamicRoutes = true
 }
 // 删除动态挂载的路由
