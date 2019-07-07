@@ -21,7 +21,7 @@ const dynamicRoutesMap = [{
     path: '/parent',
     name: 'parent',
     component: () => import(/* webpackChunkName: "store" */ '@/views/Parent.vue'), // 为了使子路由可以显示，需要添加一个Store.vue，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
-    meta: { icon: 'icon-store', title: '二级菜单' },
+    meta: { roles: ['admin', 'customer'], icon: 'icon-store', title: '二级菜单' }, // 父级菜单必须加roles，不然如果用户没有权限访问子菜单，那就会只有一个父级菜单显示在那里
     children: [{
       path: '/children1',
       name: 'children1',
