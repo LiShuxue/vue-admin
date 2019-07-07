@@ -25,8 +25,8 @@
         <el-date-picker v-model="inputForm.birth" type="datetime" placeholder="选择日期时间"></el-date-picker>
       </el-form-item>
 
-      <el-form-item label="地址" prop="adress">
-        <el-cascader v-model="inputForm.adress" :options="options" :props="{ expandTrigger: 'hover' }" @change="handleChange"></el-cascader>
+      <el-form-item label="地址" prop="address">
+        <el-cascader v-model="inputForm.address" :options="options" :props="{ expandTrigger: 'hover' }" @change="handleChange"></el-cascader>
       </el-form-item>
 
       <el-form-item label="简介" prop="intro">
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { regionData } from 'element-china-area-data'
 export default {
   data() {
     return {
@@ -48,66 +49,14 @@ export default {
         address: [],
         intro: ''
       },
-      options: [
-        {
-          value: '天津',
-          label: '天津',
-          children: [{
-            value: '红桥区',
-            label: '红桥区',
-            children: [{
-              value: '本溪路',
-              label: '本溪路'
-            }, {
-              value: '洪湖里',
-              label: '洪湖里'
-            }]
-          },
-          {
-            value: '滨海新区',
-            label: '滨海新区',
-            children: [{
-              value: '泰达',
-              label: '泰达'
-            }, {
-              value: '塘沽',
-              label: '塘沽'
-            }]
-          }]
-        },
-        {
-          value: '北京',
-          label: '北京',
-          children: [{
-            value: '丰台区',
-            label: '丰台区',
-            children: [{
-              value: '丰北桥',
-              label: '丰北桥'
-            }, {
-              value: '望园东里',
-              label: '望园东里'
-            }]
-          },
-          {
-            value: '海淀区',
-            label: '海淀区',
-            children: [{
-              value: '小南庄',
-              label: '小南庄'
-            }, {
-              value: '中关村',
-              label: '中关村'
-            }]
-          }]
-        }
-      ]
+      options: regionData
     }
   },
 
   methods: {
-    handleChange() {
-      console.log('change')
+    handleChange(value) {
+      console.log(value)
+      console.log(this.inputForm.address)
     }
   }
 }
