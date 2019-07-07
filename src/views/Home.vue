@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import API from '@/ajax/api.js'
+import { userLogout } from '@/ajax/api.js'
 import SideBar from '@/components/SideBar'
 
 export default {
@@ -60,10 +60,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.axios({
-            method: API.requireAuth.logout.type,
-            url: API.requireAuth.logout.url
-          }).then(response => {
+          userLogout().then(response => {
             this.$message.success(response.data.msg)
             this.$store.dispatch('logout')
             this.$router.push('/login')
