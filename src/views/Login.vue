@@ -98,8 +98,7 @@ export default {
             }
           }).catch(err => {
             this.getCaptcha()
-            if (err.msg) this.$message.error(err.msg)
-            else this.$message.error(err)
+            err && this.$message.error(err.msg || err.message)
           })
         }
       })

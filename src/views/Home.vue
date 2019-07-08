@@ -65,8 +65,7 @@ export default {
             this.$store.dispatch('logout')
             this.$router.push('/login')
           }).catch(err => {
-            if (err.msg) this.$message.error(err.msg)
-            else this.$message.error(err)
+            err && this.$message.error(err.msg || err.message)
           })
         })
       }
