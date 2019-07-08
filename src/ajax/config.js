@@ -29,9 +29,9 @@ axios.interceptors.response.use(response => {
     router.push({ name: 'login' })
   }
   if (response.data && response.data.code !== 200) {
-    return Promise.reject(response)
+    return Promise.reject(response.data)
   }
-  return response
+  return response.data
 }, error => {
   hideLoading()
   return Promise.reject(error)

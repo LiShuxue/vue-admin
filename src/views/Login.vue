@@ -77,8 +77,8 @@ export default {
             uuid: this.loginForm.uuid
           }
           userLogin(data).then(response => {
-            this.$message.success(response.data.msg)
-            this.$store.dispatch('login', response.data)
+            this.$message.success(response.msg)
+            this.$store.dispatch('login', response)
 
             // 保存密码
             if (this.remeberPass) {
@@ -98,7 +98,8 @@ export default {
             }
           }).catch(err => {
             this.getCaptcha()
-            err && this.$message.error(err.data.msg)
+            if (err.msg) this.$message.error(err.msg)
+            else this.$message.error(err)
           })
         }
       })
