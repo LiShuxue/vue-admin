@@ -8,7 +8,7 @@ const login = {
   type: API.notRequireAuth.login.type,
   data: {
     'msg': 'success',
-    'code': 1,
+    'code': 200,
     'expire': Random.natural(60 * 60 * 1, 60 * 60 * 12),
     'token': Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
     'username': Random.name(),
@@ -22,7 +22,7 @@ const logout = {
   type: API.requireAuth.logout.type,
   data: {
     'msg': 'success',
-    'code': 1
+    'code': 200
   }
 }
 

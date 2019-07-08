@@ -8,13 +8,13 @@ const dynamicRoutesMap = [{
   children: [{
     path: '/intro',
     name: 'intro',
-    component: () => import((/* webpackChunkName: "intro" */ '@/views/Intro.vue')),
+    component: () => import(/* webpackChunkName: "intro" */ '@/views/Intro.vue'),
     meta: { icon: 'icon-home', title: '系统简介' }
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import((/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')),
+    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
     meta: { roles: ['admin'], icon: 'icon-dashboard', title: '图表面板' }
   },
   {
@@ -25,38 +25,38 @@ const dynamicRoutesMap = [{
     children: [{
       path: '/children1',
       name: 'children1',
-      component: () => import((/* webpackChunkName: "children1" */ '@/views/Children1.vue')),
+      component: () => import(/* webpackChunkName: "children1" */ '@/views/Children1.vue'),
       meta: { roles: ['admin'], title: '子菜单1' }
     },
     {
       path: '/children2',
       name: 'children2',
-      component: () => import((/* webpackChunkName: "children2" */ '@/views/Children2.vue')),
+      component: () => import(/* webpackChunkName: "children2" */ '@/views/Children2.vue'),
       meta: { roles: ['customer'], title: '子菜单2' }
     }]
   },
   {
     path: '/admin',
     name: 'admin',
-    component: () => import((/* webpackChunkName: "admin" */ '@/views/Admin.vue')),
+    component: () => import(/* webpackChunkName: "admin" */ '@/views/Admin.vue'),
     meta: { roles: ['admin'], icon: 'icon-admin', title: '管理员列表' }
   },
   {
     path: '/user',
     name: 'user',
-    component: () => import((/* webpackChunkName: "user" */ '@/views/User.vue')),
+    component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
     meta: { roles: ['admin', 'customer'], icon: 'icon-user', title: '用户管理' }
   },
   {
     path: '/input',
     name: 'input',
-    component: () => import((/* webpackChunkName: "input" */ '@/views/Input.vue')),
+    component: () => import(/* webpackChunkName: "input" */ '@/views/Input.vue'),
     meta: { icon: 'icon-form', title: '表单输入' }
   },
   {
     path: '/editor',
     name: 'editor',
-    component: () => import((/* webpackChunkName: "editor" */ '@/views/Editor.vue')),
+    component: () => import(/* webpackChunkName: "editor" */ '@/views/Editor.vue'),
     meta: { roles: ['customer'], icon: 'icon-edit', title: '文本编辑' }
   }]
 }]
