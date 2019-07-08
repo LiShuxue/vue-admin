@@ -61,11 +61,12 @@ export default {
           type: 'warning'
         }).then(() => {
           userLogout().then(response => {
-            this.$message.success(response.data.msg)
+            this.$message.success(response.msg)
             this.$store.dispatch('logout')
             this.$router.push('/login')
           }).catch(err => {
-            err && this.$message.error(err.data.msg)
+            if (err.msg) this.$message.error(err.msg)
+            else this.$message.error(err)
           })
         })
       }
