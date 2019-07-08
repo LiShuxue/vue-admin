@@ -25,7 +25,7 @@ axios.interceptors.response.use(response => {
   hideLoading()
   // 401, token失效
   if (response.data && response.data.code === 401) {
-    this.$store.dispatch('logout')
+    store.dispatch('logout')
     router.push({ name: 'login' })
   }
   if (response.data && response.data.code !== 200) {
