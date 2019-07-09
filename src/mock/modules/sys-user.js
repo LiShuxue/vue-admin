@@ -13,6 +13,7 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
     'company': '公司',
     'category': ['分类1', '分类2'],
     'choose|1': ['choose1', 'choose2', 'choose3'],
+    'address': Random.county(true),
     'price': Random.natural(1000, 9999)
   }))
 }

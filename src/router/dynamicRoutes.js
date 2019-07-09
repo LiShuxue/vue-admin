@@ -36,16 +36,10 @@ const dynamicRoutesMap = [{
     }]
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: () => import(/* webpackChunkName: "admin" */ '@/views/Admin.vue'),
-    meta: { roles: ['admin'], icon: 'icon-admin', title: '管理员列表' }
-  },
-  {
-    path: '/user',
-    name: 'user',
-    component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
-    meta: { roles: ['admin', 'customer'], icon: 'icon-user', title: '用户管理' }
+    path: '/store',
+    name: 'store',
+    component: () => import(/* webpackChunkName: "store" */ '@/views/Store.vue'),
+    meta: { roles: ['admin'], icon: 'icon-store', title: '门店管理' }
   },
   {
     path: '/input',
