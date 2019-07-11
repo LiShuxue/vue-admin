@@ -147,32 +147,23 @@ export default {
         address: ''
       },
 
-      // 新增页面表单信息
-      addForm: {
+      // 表单信息模板
+      formTemplate: {
         name: '',
         role: '',
         phone: '',
         address: '',
         date: ''
       },
+
+      // 新增页面表单信息
+      addForm: {},
 
       // 编辑页面表单信息
-      editForm: {
-        name: '',
-        role: '',
-        phone: '',
-        address: '',
-        date: ''
-      },
+      editForm: {},
 
       // 查看详情页面表单信息
-      seeForm: {
-        name: '',
-        role: '',
-        phone: '',
-        address: '',
-        date: ''
-      },
+      seeForm: {},
 
       tableData: [], // 当前页面显示的table
       storeList: [], // 后端返回的所有的list信息
@@ -187,6 +178,19 @@ export default {
     }
   },
 
+  computed: {
+    // 将一些数据转换成用户可以懂的信息
+    refactorTableData() {
+      let refactorData = []
+      this.tableData.forEach(value => {
+        let item = Object.assign({}, value)
+        item.date = value.date.substring(0, 10)
+        refactorData.push(item)
+      })
+      return refactorData
+    }
+  },
+
   created() {
     this.initData()
   },
@@ -198,7 +202,7 @@ export default {
       getStoreList().then(response => {
         this.$message.success(response.msg)
         // 初始化所有数据
-        this.storeList = response.storeList
+        this.storeList = response.data
         this.totalItem = this.storeList.length
         this.tableData = this.storeList.slice(0, this.pageSize)
         this.queryList = []
@@ -225,12 +229,7 @@ export default {
     showAddForm() {
       console.log('open add dialog')
       this.addFormVisible = true
-      this.addForm = {
-        name: '',
-        role: '',
-        phone: '',
-        date: ''
-      }
+      this.addForm = Object.assign({}, this.formTemplate)
     },
     // 点击取消按钮，关闭Form表单
     closeAddForm() {
@@ -290,7 +289,7 @@ export default {
       console.log(row)
       getStoreDetail(row.id).then(response => {
         this.$message.success(response.msg)
-        this.seeForm = response.store
+        this.seeForm = response.data
         this.seeFormVisible = true
       }).catch(err => {
         err && this.$message.error(err.msg || err.message)
@@ -318,14 +317,11 @@ export default {
     clickEditItem(row, index) {
       console.log(index)
       console.log(row)
-      this.editForm = {
-        name: '',
-        role: '',
-        phone: '',
-        date: ''
-      }
+      let editItem = this.tableData.filter(value => {
+        return value.id === row.id
+      })
+      this.editForm = Object.assign({}, this.formTemplate, editItem[0])
       this.editFormVisible = true
-      this.editForm = Object.assign({}, row)
     },
     // 关闭编辑页面
     closeEditForm() {
