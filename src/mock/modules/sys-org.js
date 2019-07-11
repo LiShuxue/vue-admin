@@ -14,7 +14,7 @@ let store = Mock.mock({
 let storeList = []
 for (let i = 0; i < Math.floor(Math.random() * 500 + 1); i++) {
   storeList.push(Mock.mock({
-    'id': Random.integer(1, 5),
+    'id': i,
     'name': Random.cname(),
     'role|1': ['总店', '直营店', '加盟店'],
     'phone': Random.natural(11311111111, 18900000000),
@@ -29,7 +29,7 @@ const getStoreList = {
   data: {
     'msg': 'success',
     'code': 200,
-    'storeList': storeList
+    'data': storeList
   }
 }
 
@@ -39,7 +39,7 @@ const getStoreDetail = {
   data: {
     'msg': 'success',
     'code': 200,
-    'store': store
+    'data': store
   }
 }
 
