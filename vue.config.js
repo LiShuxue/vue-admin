@@ -7,5 +7,8 @@ module.exports = {
    */
   publicPath: process.env.VUE_APP_PUBLICPATH,
 
+  // 关闭production 的sourcemap
+  productionSourceMap: false,
+
   chainWebpack(config) {}
 }
