@@ -387,7 +387,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .store {
   padding: 20px;
 

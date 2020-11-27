@@ -4,8 +4,32 @@ const dynamicRoutesMap = [{
   path: '/home',
   name: 'home',
   component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-  redirect: 'intro',
+  redirect: 'gongzuotai',
   children: [{
+    path: '/network-security',
+    name: 'network-security',
+    component: () => import(/* webpackChunkName: "parent" */ '@/views/Parent.vue'), // 为了使子路由可以显示，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
+    meta: { roles: ['admin', 'customer'], icon: 'icon-tool-cabinet_icon', title: '网络安全管理平台' }, // 父级菜单必须加roles，不然如果用户没有权限访问子菜单，那就会只有一个父级菜单显示在那里
+    children: [{
+      path: '/gongzuotai',
+      name: 'gongzuotai',
+      component: () => import(/* webpackChunkName: "gongzuotai" */ '@/views/network-security/Gongzuotai.vue'),
+      meta: { roles: ['admin'], title: '工作台' }
+    },
+    {
+      path: '/wodedaiban',
+      name: 'wodedaiban',
+      component: () => import(/* webpackChunkName: "wodedaiban" */ '@/views/network-security/Wodedaiban.vue'),
+      meta: { roles: ['customer'], title: '我的待办' }
+    },
+    {
+      path: '/renwuqingdan',
+      name: 'renwuqingdan',
+      component: () => import(/* webpackChunkName: "renwuqingdan" */ '@/views/network-security/Renwuqingdan.vue'),
+      meta: { roles: ['customer'], title: '任务清单' }
+    }]
+  },
+  {
     path: '/intro',
     name: 'intro',
     component: () => import(/* webpackChunkName: "intro" */ '@/views/Intro.vue'),
@@ -20,7 +44,7 @@ const dynamicRoutesMap = [{
   {
     path: '/parent',
     name: 'parent',
-    component: () => import(/* webpackChunkName: "store" */ '@/views/Parent.vue'), // 为了使子路由可以显示，需要添加一个Store.vue，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
+    component: () => import(/* webpackChunkName: "parent" */ '@/views/Parent.vue'), // 为了使子路由可以显示，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
     meta: { roles: ['admin', 'customer'], icon: 'icon-store', title: '二级菜单' }, // 父级菜单必须加roles，不然如果用户没有权限访问子菜单，那就会只有一个父级菜单显示在那里
     children: [{
       path: '/children1',

@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .input{
   padding: 20px;
   width: 400px;

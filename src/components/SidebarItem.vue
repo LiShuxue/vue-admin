@@ -31,3 +31,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.iconfont{
+  margin-right: 5px;
+}
+</style>
