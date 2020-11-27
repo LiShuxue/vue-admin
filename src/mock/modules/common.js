@@ -12,7 +12,7 @@ const login = {
     'expire': Random.natural(60 * 60 * 1, 60 * 60 * 12),
     'token': Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
     'username': Random.name(),
-    'roles': ['admin']
+    'roles': ['admin', 'customer']
   }
 }
 

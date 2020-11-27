@@ -7,6 +7,10 @@ module.exports = {
    */
   publicPath: process.env.VUE_APP_PUBLICPATH,
 
+  devServer: {
+    port: 8000
+  },
+
   // 关闭production 的sourcemap
   productionSourceMap: false,
 
