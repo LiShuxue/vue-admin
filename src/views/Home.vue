@@ -1,16 +1,20 @@
 <template>
   <div class="home">
+
     <div class="header">
-      <div class="logo"></div>
-      <div class="title">大港油田网络安全管理平台</div>
-      <div class="tools">
-        <span class="role">普通用户</span>
-        <span class="danwei">单位：科技信息处</span>
-        <span class="iconfont icon-quanping"></span>
-        <span class="iconfont icon-huanfu"></span>
+      <div :class="isCollapse?'system-title-fold':'system-title-unfold'">XXX管理系统</div>
+      <div class="fold-icon" @click="foldMenu">
+        <i v-show="isCollapse" class="el-icon-s-unfold"></i>
+        <i v-show="!isCollapse" class="el-icon-s-fold"></i>
+      </div>
+      <div class="admin-icon">
         <el-dropdown @command="handleCommand">
-          <span class="iconfont icon-user"></span>
+          <span class="el-dropdown-link">
+            <span class="username">{{this.$store.state.username}}</span>
+            <img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0s9z66ra9j305k05k3yj.jpg"/>
+          </span>
           <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="login">个人中心</el-dropdown-item>
             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -70,46 +74,65 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .home {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
 
   .header {
-    position: relative;
     width: 100%;
-    height: 55px;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(52, 128, 207, 1);
+    height: 60px;
+    background: #20a0ff;
     display: flex;
     flex-direction: row;
-    align-items: center;
 
-    .logo{
-      height: 30px;
+    .system-title-fold {
+      line-height: 60px;
+      border-right: solid 1px white;
+      box-sizing: border-box;
+      padding-left: 20px;
+      width: 65px;
+      height: 100%;
+      transition: all .4s;
+    }
+
+    .system-title-unfold {
+      line-height: 60px;
+      border-right: solid 1px white;
+      box-sizing: border-box;
+      padding-left: 28px;
+      width: calc(14vw + 1px);
+      height: 100%;
+      transition: all .4s;
+    }
+
+    .fold-icon {
+      line-height: 60px;
+      padding: 0 15px;
+      color: white;
+      font-size: 1.5em;
       width: 30px;
-      margin: 0 15px 0 30px;
-      background: url('../assets/img/logo.png') no-repeat;
-      background-size: contain;
-      background-position: center;
-    }
-    .title{
-      font-size: 20px;
     }
 
-    .tools{
+    .admin-icon{
       position: absolute;
-      right: 50px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      .role, .danwei{
-        margin-right: 50px;
+      right: 30px;
+      height: 60px;
+      line-height: 60px;
+      .username{
+        position: relative;
+        top: -25px;
+        right: 10px;
+        color: #fff;
       }
-      .iconfont{
-        font-size: 30px;
-        margin-right: 10px;
+      img{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
       }
     }
   }

@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 #app {
   position: relative;
   width: 100vw;

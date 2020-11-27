@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="defaultActiveRoute" :collapse="isCollapse" @select="handleSelect" background-color="rgba(22, 87, 155, 1)" color="rgba(255, 255, 255, 1)" class="menu-bar">
+  <el-menu :default-active="defaultActiveRoute" :collapse="isCollapse" @select="handleSelect" background-color="#eef1f6" class="menu-bar">
     <sidebar-item v-for="item in availableRoutes" :key="item.path" :item="item" />
   </el-menu>
 </template>
@@ -36,13 +36,14 @@ export default {
 
   methods: {
     handleSelect(key, keyPath) {
+      console.log(key, keyPath)
       this.$router.push(key)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .menu-bar{
   height: calc(100vh - 60px);
   .iconfont {

@@ -112,7 +112,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-page{
   .login-form{
     max-width: 400px;
