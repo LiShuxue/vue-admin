@@ -1,9 +1,11 @@
 <template>
   <el-menu
-    :default-active="defaultActiveRoute"
+    :default-active="$route.name"
     :collapse="isCollapse"
     @select="handleSelect"
-    background-color="#eef1f6"
+    background-color="rgb(22, 87, 155)"
+    text-color="#fff"
+    active-text-color="#fff"
     class="menu-bar"
   >
     <sidebar-item v-for="item in availableRoutes" :key="item.path" :item="item" />
@@ -29,35 +31,43 @@ export default {
   computed: {
     ...mapState(['dynamicRoutes']),
 
-    defaultActiveRoute() {
-      return this.dynamicRoutes[0].redirect;
-    },
-
     availableRoutes() {
       return this.dynamicRoutes[0].children;
     }
   },
 
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect(key) {
       this.$router.push(key);
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .menu-bar {
-  height: calc(100vh - 60px);
-  .iconfont {
-    margin-right: 15px;
-  }
+  height: $side-bar-height;
+  overflow-y: scroll;
   .el-menu-item {
     overflow: hidden;
   }
 }
 .menu-bar:not(.el-menu--collapse) {
-  width: 14vw;
+  width: $side-bar-width;
+}
+/deep/ .el-menu-item,
+/deep/ .el-submenu__title {
+  height: 44px !important;
+  line-height: 44px !important;
+}
+/deep/ .el-submenu .el-menu-item {
+  min-width: 0 !important;
+}
+/deep/ .el-menu-item.is-active {
+  background-color: rgb(10, 44, 74) !important;
+}
+/deep/ .el-menu-item:hover,
+/deep/ .el-submenu__title:hover {
+  background-color: rgb(10, 44, 74) !important;
 }
 </style>

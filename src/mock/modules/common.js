@@ -9,10 +9,26 @@ const login = {
   data: {
     msg: 'success',
     code: 200,
-    expire: Random.natural(60 * 60 * 1, 60 * 60 * 12),
     token: Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
-    username: Random.name(),
-    roles: ['admin', 'customer']
+    user: {
+      user: {
+        id: 1,
+        name: '张三',
+        role: '角色',
+        permissionList: ['按钮1', '按钮2', '按钮3', '按钮4', '按钮5'],
+        menuList: [
+          '系统简介',
+          '图表面板',
+          '表格显示',
+          '上传导出',
+          '文本编辑',
+          '系统管理',
+          '用户管理',
+          '角色管理',
+          '权限管理'
+        ]
+      }
+    }
   }
 };
 

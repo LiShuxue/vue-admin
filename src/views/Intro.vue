@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .intro {
   padding-left: 20px;
 }

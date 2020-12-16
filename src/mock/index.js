@@ -1,9 +1,7 @@
 import Mock from 'mockjs';
 import common from './modules/common';
-import sysOrg from './modules/sys-org';
 
 useMock(common);
-useMock(sysOrg);
 
 function useMock(modules) {
   for (let key in modules) {

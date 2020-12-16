@@ -146,8 +146,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.editor {
-  padding: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

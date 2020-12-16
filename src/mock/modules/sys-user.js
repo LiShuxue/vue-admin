@@ -15,7 +15,8 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
       category: ['分类1', '分类2'],
       'choose|1': ['choose1', 'choose2', 'choose3'],
       address: Random.county(true),
-      price: Random.natural(1000, 9999)
+      price: Random.natural(1000, 9999),
+      phone: Random.natural(11311111111, 18900000000)
     })
   );
 }
