@@ -8,11 +8,26 @@ module.exports = {
   publicPath: process.env.VUE_APP_PUBLICPATH,
 
   devServer: {
-    port: 8000
+    port: 8000,
+    proxy: {
+      '/api': {
+        target: process.env.VUE_APP_API_URL,
+        pathRewrite: { '^/api': '' },
+        secure: false,
+        changOrigin: true
+      }
+    }
   },
 
   // 关闭production 的sourcemap
   productionSourceMap: false,
 
-  chainWebpack(config) {}
-}
+  css: {
+    loaderOptions: {
+      // 引入全局的scss
+      scss: {
+        additionalData: `@import "~@/assets/style/base.scss";`
+      }
+    }
+  }
+};

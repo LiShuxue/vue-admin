@@ -1,6 +1,6 @@
 {
   "name": "vue-admin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "mock": "vue-cli-service serve --mode mock",
@@ -9,41 +9,41 @@
     "build-mock": "vue-cli-service build --mode mock",
     "build-sit": "vue-cli-service build --mode sit",
     "build-prod": "vue-cli-service build --mode prod",
-    "lint": "vue-cli-service lint",
-    "start-mock": "yarn lint && yarn mock",
-    "start-sit": "yarn lint && yarn sit",
-    "start-prod": "yarn lint && yarn prod"
+    "lint": "vue-cli-service lint"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-push": "yarn lint"
     }
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "core-js": "^2.6.5",
-    "crypto-js": "^3.1.9-1",
-    "echarts": "^4.2.1",
-    "element-china-area-data": "^4.1.2",
-    "element-ui": "^2.9.1",
+    "axios": "^0.21.0",
+    "core-js": "^3.6.5",
+    "dayjs": "^1.9.6",
+    "echarts": "^4.9.0",
+    "element-ui": "^2.14.1",
     "normalize.css": "^8.0.1",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1",
-    "wangeditor": "^3.1.1"
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0",
+    "wangeditor": "^4.5.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-service": "^3.8.4",
-    "@vue/eslint-config-standard": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "husky": "^3.0.0",
-    "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^6.2.2",
+    "husky": "^4.3.6",
+    "mockjs": "^1.1.0",
+    "node-sass": "^5.0.0",
+    "prettier": "^1.19.1",
+    "sass-loader": "^10.1.0",
+    "vue-template-compiler": "^2.6.11"
   }
 }
