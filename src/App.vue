@@ -4,10 +4,20 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
+// 滚动条不显示
+::-webkit-scrollbar {
+  display: none;
+}
+
 #app {
   position: relative;
-  width: 100vw;
+  width: $app-width;
+  height: $app-height;
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;

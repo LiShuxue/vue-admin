@@ -1,32 +1,30 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { resetRoute } from '@/router';
+import router, { resetRoute } from '@/router';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token: '',
-    username: '',
-    userRoles: [],
+    tabList: [],
+    loginResponse: {},
     dynamicRoutes: []
   },
 
   getters: {},
 
   mutations: {
-    saveToken(state, token) {
-      state.token = token;
-      sessionStorage.setItem('token', token);
+    pushTab(state, tab) {
+      state.tabList.push(tab);
     },
-    saveUsername(state, username) {
-      state.username = username;
-      sessionStorage.setItem('username', username);
+    updateTabList(state, tabList) {
+      state.tabList = tabList;
     },
-    saveUserRoles(state, roles) {
-      state.userRoles = roles;
-      // session storage 不能存数组，只能存字符串。所以用+拼接数组的内容存起来，解析的时候再把它转换成数组
-      sessionStorage.setItem('userRoles', roles.join('+'));
+    saveLoginResponse(state, res) {
+      if (res) {
+        state.loginResponse = res;
+        sessionStorage.setItem('loginResponse', JSON.stringify(res));
+      }
     },
     saveDynamicRoutes(state, routes) {
       state.dynamicRoutes = routes;
@@ -35,15 +33,59 @@ export default new Vuex.Store({
 
   actions: {
     login({ commit }, payload) {
-      commit('saveToken', payload.token);
-      commit('saveUsername', payload.username);
-      commit('saveUserRoles', payload.roles);
+      commit('saveLoginResponse', payload);
     },
     logout({ commit }) {
-      commit('saveToken', '');
-      commit('saveUsername', '');
-      commit('saveUserRoles', []);
+      commit('saveLoginResponse', {});
+      commit('updateTabList', []);
       resetRoute();
+    },
+    deleteTabAction({ state, commit }, payload) {
+      // 当第一个是"系统简介"，并且tabList只有这个的时候， 不允许被删除
+      // 否则， 才允许被删除
+      if (!(state.tabList.length === 1 && state.tabList[0] === 'intro')) {
+        let index = 0;
+        state.tabList.forEach((item, i) => {
+          if (item === payload) {
+            index = i;
+          }
+        });
+
+        // 如果删除的是最后一个
+        if (index === state.tabList.length - 1) {
+          state.tabList.splice(index, 1);
+          commit('updateTabList', state.tabList);
+          // 如果tabList被删完了，跳转到系统简介页面
+          if (state.tabList.length === 0) {
+            router.push('intro');
+          } else {
+            // 否则跳转到上一个
+            router.push(state.tabList[index - 1]);
+          }
+        } else {
+          // 删除的不是最后一个
+          // 如果当前路由是你正准备删的路由
+          if (router.currentRoute.name === payload) {
+            // 如果是第一个
+            if (index === 0) {
+              if (state.tabList.length > 1) {
+                router.push(state.tabList[index + 1]);
+              } else {
+                router.push('intro');
+              }
+            } else {
+              // 否则跳转到上一个
+              router.push(state.tabList[index - 1]);
+            }
+            state.tabList.splice(index, 1);
+            commit('updateTabList', state.tabList);
+          } else {
+            // 否则， 直接从tabList删除
+            state.tabList.splice(index, 1);
+            commit('updateTabList', state.tabList);
+          }
+        }
+      }
     }
   }
 });

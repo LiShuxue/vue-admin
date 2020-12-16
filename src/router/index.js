@@ -6,19 +6,13 @@ import dynamicRoutes from './dynamicRoutes';
 
 Vue.use(Router);
 
-// 页面刷新时，重新赋值token 和 username，以及roles。保证页面刷新之后不用重新登陆，只有关闭页面再打开才需要重新登录
-if (window.sessionStorage) {
-  if (window.sessionStorage.getItem('token')) {
-    store.commit('saveToken', window.sessionStorage.getItem('token'));
-  }
-  if (window.sessionStorage.getItem('username')) {
-    store.commit('saveUsername', window.sessionStorage.getItem('username'));
-  }
-  // 刷新需要重新赋值role，因为刷新后动态添加的route也不存在了，需要重新添加。
-  if (window.sessionStorage.getItem('userRoles')) {
-    // 用+将字符串再分割成数组
-    store.commit('saveUserRoles', window.sessionStorage.getItem('userRoles').split('+'));
-  }
+// 页面刷新时，重新赋值login response。保证页面刷新之后不用重新登陆，只有关闭页面再打开才需要重新登录
+if (
+  sessionStorage.getItem('loginResponse') &&
+  sessionStorage.getItem('loginResponse') !== 'undefined' &&
+  sessionStorage.getItem('loginResponse') !== 'null'
+) {
+  store.commit('saveLoginResponse', JSON.parse(sessionStorage.getItem('loginResponse')));
 }
 
 const createRouter = () =>
@@ -32,7 +26,7 @@ const createRouter = () =>
 const router = createRouter();
 
 router.beforeEach((to, from, next) => {
-  if (store.state.token) {
+  if (store.state.loginResponse.token) {
     // 如果没有动态添加过路由（可能是首次登陆，或者浏览器刷新了页面，或者已经退出登陆），就添加动态路由
     if (!router.options.isAddDynamicRoutes) {
       addDynamicRoute();
