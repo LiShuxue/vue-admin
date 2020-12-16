@@ -4,10 +4,6 @@
 $app-width: 100vw;
 $app-height: 100vh;
 
-// login 页面
-$login-page-bg-height: calc(466 / 1366 * #{$app-width}); // 背景图片的高宽比是 466 : 1366
-$login-input-width: 22vw;
-
 // 最顶部header
 $header-height: 50px;
 $header-width: #{$app-width};
@@ -19,17 +15,21 @@ $content-height: calc(100vh - #{$header-height});
 // 菜单栏
 $side-bar-width: 14vw;
 $side-bar-height: $content-height;
+$side-bar-collapse-width: 64px;
 
 // 菜单右侧内容区域
 $container-width: calc(100vw - #{$side-bar-width});
+$container-collapse-width: calc(100vw - #{$side-bar-collapse-width});
 $container-height: $content-height;
 
 // 面包屑高度
 $container-header1-width: $container-width;
+$container-header1-collapse-width: $container-collapse-width;
 $container-header1-height: 50px;
 
 // 标签栏高度
 $container-header2-width: $container-width;
+$container-header2-collapse-width: $container-collapse-width;
 $container-header2-height: 35px;
 
 // 阴影
@@ -42,21 +42,16 @@ $container-wrapper-margin-bottom: 10px;
 $container-wrapper-padding: $container-wrapper-padding-top $container-wrapper-padding-left 0
   $container-wrapper-padding-left;
 $container-wrapper-width: $container-width;
+$container-wrapper-collapse-width: $container-collapse-width;
 $container-wrapper-height: calc(
   #{$container-height} - #{$container-header1-height} - #{$container-header2-height} - #{$container-wrapper-margin-bottom}
 );
 
 // 真正的路由内容区域，宽高
 $container-inner-width: calc(#{$container-wrapper-width} - (2 * #{$container-wrapper-padding-left}));
+$container-inner-collapse-width: calc(#{$container-wrapper-collapse-width} - (2 * #{$container-wrapper-padding-left}));
 $container-inner-height: calc(#{$container-wrapper-height} - #{$container-wrapper-padding-top});
 
 $common-margin: 7px;
-$card-header-height: 45px;
-
-$search-bar-height: 60px;
-$count-bar-height: 60px;
 
 $table-pagination-height: 35px;
-
-$analyse-card-height: 190px;
-$analyse-line-card-height: 150px;

@@ -1,8 +1,7 @@
 <template>
   <div class="intro">
     <div class="intro-title">
-      <h1>项目介绍</h1>
-      <br />
+      项目介绍
     </div>
     <div class="intro-content">
       <h3>技术架构</h3>
@@ -29,6 +28,15 @@
 
 <style lang="scss" scoped>
 .intro {
-  padding-left: 20px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 20px;
+
+  .intro-title {
+    padding: 20px 0;
+    font-size: 30px;
+    font-weight: bold;
+  }
 }
 </style>

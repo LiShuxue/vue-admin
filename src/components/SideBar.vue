@@ -48,6 +48,7 @@ export default {
 .menu-bar {
   height: $side-bar-height;
   overflow-y: scroll;
+  transition: all 0s;
   .el-menu-item {
     overflow: hidden;
   }
