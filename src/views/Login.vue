@@ -31,7 +31,6 @@
 
 <script>
 import { userLogin } from '@/ajax/api.js';
-import SHA256 from 'crypto-js/sha256';
 import { getUUID } from '@/utils';
 
 export default {
@@ -64,38 +63,26 @@ export default {
     submitLogin() {
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
-          let data = {
-            username: this.loginForm.username,
-            password: SHA256(this.loginForm.password).toString(),
-            captcha: this.loginForm.captcha,
-            uuid: this.loginForm.uuid
-          };
-          userLogin(data)
-            .then(response => {
-              this.$message.success(response.msg);
-              this.$store.dispatch('login', response);
+          userLogin(this.loginForm).then(response => {
+            this.$store.dispatch('login', response);
 
-              // 保存密码
-              if (this.remeberPass) {
-                localStorage.setItem('username', this.loginForm.username);
-                localStorage.setItem('password', this.loginForm.password);
-              } else {
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-              }
+            // 保存密码
+            if (this.remeberPass) {
+              localStorage.setItem('username', this.loginForm.username);
+              localStorage.setItem('password', this.loginForm.password);
+            } else {
+              localStorage.removeItem('username');
+              localStorage.removeItem('password');
+            }
 
-              // 根据传过来的参数，跳到不同的页面
-              let redirect = decodeURIComponent(this.$route.query.redirect);
-              if (redirect !== 'undefined') {
-                this.$router.push(redirect);
-              } else {
-                this.$router.push('/home');
-              }
-            })
-            .catch(err => {
-              this.getCaptcha();
-              err && this.$message.error(err.msg || err.message);
-            });
+            // 根据传过来的参数，跳到不同的页面
+            let redirect = decodeURIComponent(this.$route.query.redirect);
+            if (redirect !== 'undefined') {
+              this.$router.push(redirect);
+            } else {
+              this.$router.push('/home');
+            }
+          });
         }
       });
     },
@@ -108,7 +95,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login-page {
   .login-form {
     max-width: 400px;
@@ -118,7 +105,6 @@ export default {
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #eaeaea;
-    // box-shadow: 0 0 25px #cac6c6;
 
     .title {
       text-align: center;

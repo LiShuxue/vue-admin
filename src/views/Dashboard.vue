@@ -22,17 +22,12 @@
 import echarts from 'echarts';
 export default {
   data() {
-    return {
-      chartColumn: null,
-      chartBar: null,
-      chartLine: null,
-      chartPie: null
-    };
+    return {};
   },
   methods: {
     drawColumnChart() {
-      this.chartColumn = echarts.init(document.getElementById('chartColumn'));
-      this.chartColumn.setOption({
+      const chart = echarts.init(document.getElementById('chartColumn'));
+      chart.setOption({
         title: { text: 'Order Chart' },
         tooltip: {},
         xAxis: {
@@ -60,8 +55,8 @@ export default {
       });
     },
     drawBarChart() {
-      this.chartBar = echarts.init(document.getElementById('chartBar'));
-      this.chartBar.setOption({
+      const chart = echarts.init(document.getElementById('chartBar'));
+      chart.setOption({
         title: {
           text: 'Bar Chart',
           subtext: '数据来自网络'
@@ -104,8 +99,8 @@ export default {
       });
     },
     drawLineChart() {
-      this.chartLine = echarts.init(document.getElementById('chartLine'));
-      this.chartLine.setOption({
+      const chart = echarts.init(document.getElementById('chartLine'));
+      chart.setOption({
         title: { text: 'Line Chart' },
         tooltip: {
           trigger: 'axis'
@@ -150,8 +145,8 @@ export default {
       });
     },
     drawPieChart() {
-      this.chartPie = echarts.init(document.getElementById('chartPie'));
-      this.chartPie.setOption({
+      const chart = echarts.init(document.getElementById('chartPie'));
+      chart.setOption({
         title: {
           text: 'Pie Chart',
           subtext: '纯属虚构',
