@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { Message } from 'element-ui';
 import API from './api';
 import store from '@/store';
 import router from '@/router';
 import { showLoading, hideLoading } from '@/utils';
 
 axios.defaults.timeout = 20 * 1000;
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 
 axios.interceptors.request.use(
@@ -14,12 +15,13 @@ axios.interceptors.request.use(
     for (let key in API.requireAuth) {
       // 需要携带token
       if (config.url.includes(API.requireAuth[key].url)) {
-        config.headers.Authorization = `Bearer ${store.state.token}`;
+        config.headers.Authorization = `Bearer ${store.state.loginResponse.token}`;
       }
     }
     return config;
   },
   error => {
+    handleError(error);
     return Promise.reject(error);
   }
 );
@@ -27,20 +29,51 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     hideLoading();
-    // 401, token失效
-    if (response.data && response.data.code === 401) {
-      store.dispatch('logout');
-      router.push({ name: 'login' });
-    }
     if (response.data && response.data.code !== 200) {
+      handleError(response.data);
       return Promise.reject(response.data);
+    } else {
+      return response.data;
     }
-    return response.data;
   },
   error => {
-    hideLoading();
+    handleError(error);
     return Promise.reject(error);
   }
 );
+
+export const handleError = error => {
+  hideLoading();
+  if (!error.status) {
+    // 非http错误 1. js 异常 2. 后台返回接口报错
+    Message.error({
+      showClose: true,
+      message: error.message
+    });
+  } else if (error.status === 401) {
+    store.dispatch('logout');
+    router.push({ name: 'login' });
+  } else if (error.status === 404) {
+    Message.error({
+      showClose: true,
+      message: '404 Not Found'
+    });
+  } else if (error.status === 500) {
+    Message.error({
+      showClose: true,
+      message: '500 Server Internal Error'
+    });
+  } else if (error.status === 503) {
+    Message.error({
+      showClose: true,
+      message: '503 Service Unavailable'
+    });
+  } else {
+    Message.error({
+      showClose: true,
+      message: 'Unknown Error'
+    });
+  }
+};
 
 export default axios;
