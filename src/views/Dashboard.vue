@@ -43,7 +43,8 @@ export default {
           name: '订单数'
         },
         dataZoom: [
-          { // 控制x轴 平移。
+          {
+            // 控制x轴 平移。
             type: 'inside',
             start: 0,
             end: 50
@@ -205,5 +206,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

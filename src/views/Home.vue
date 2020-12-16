@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-
     <div class="header">
-      <div :class="isCollapse?'system-title-fold':'system-title-unfold'">XXX管理系统</div>
+      <div :class="isCollapse ? 'system-title-fold' : 'system-title-unfold'">XXX管理系统</div>
       <div class="fold-icon" @click="foldMenu">
         <i v-show="isCollapse" class="el-icon-s-unfold"></i>
         <i v-show="!isCollapse" class="el-icon-s-fold"></i>
@@ -10,8 +9,8 @@
       <div class="admin-icon">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
-            <span class="username">{{this.$store.state.username}}</span>
-            <img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0s9z66ra9j305k05k3yj.jpg"/>
+            <span class="username">{{ this.$store.state.username }}</span>
+            <img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0s9z66ra9j305k05k3yj.jpg" />
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="login">个人中心</el-dropdown-item>
@@ -24,9 +23,9 @@
     <div class="content">
       <side-bar :isCollapse="isCollapse"></side-bar>
 
-      <div :class="isCollapse?'container-fold':'container-unfold'">
+      <div :class="isCollapse ? 'container-fold' : 'container-unfold'">
         <div class="container-wrapper">
-          <router-view/>
+          <router-view />
         </div>
       </div>
     </div>
@@ -34,14 +33,14 @@
 </template>
 
 <script>
-import { userLogout } from '@/ajax/api.js'
-import SideBar from '@/components/SideBar'
+import { userLogout } from '@/ajax/api.js';
+import SideBar from '@/components/SideBar';
 
 export default {
   data() {
     return {
       isCollapse: false
-    }
+    };
   },
 
   components: {
@@ -50,7 +49,7 @@ export default {
 
   methods: {
     foldMenu() {
-      this.isCollapse = !this.isCollapse
+      this.isCollapse = !this.isCollapse;
     },
 
     handleCommand(command) {
@@ -60,18 +59,20 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          userLogout().then(response => {
-            this.$message.success(response.msg)
-            this.$store.dispatch('logout')
-            this.$router.push('/login')
-          }).catch(err => {
-            err && this.$message.error(err.msg || err.message)
-          })
-        })
+          userLogout()
+            .then(response => {
+              this.$message.success(response.msg);
+              this.$store.dispatch('logout');
+              this.$router.push('/login');
+            })
+            .catch(err => {
+              err && this.$message.error(err.msg || err.message);
+            });
+        });
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -97,7 +98,7 @@ export default {
       padding-left: 20px;
       width: 65px;
       height: 100%;
-      transition: all .4s;
+      transition: all 0.4s;
     }
 
     .system-title-unfold {
@@ -107,7 +108,7 @@ export default {
       padding-left: 28px;
       width: calc(14vw + 1px);
       height: 100%;
-      transition: all .4s;
+      transition: all 0.4s;
     }
 
     .fold-icon {
@@ -118,18 +119,18 @@ export default {
       width: 30px;
     }
 
-    .admin-icon{
+    .admin-icon {
       position: absolute;
       right: 30px;
       height: 60px;
       line-height: 60px;
-      .username{
+      .username {
         position: relative;
         top: -25px;
         right: 10px;
         color: #fff;
       }
-      img{
+      img {
         width: 60px;
         height: 60px;
         border-radius: 50%;
@@ -137,28 +138,28 @@ export default {
     }
   }
 
-  .content{
+  .content {
     display: flex;
     flex-direction: row;
 
-    .container-unfold{
+    .container-unfold {
       position: relative;
       box-sizing: border-box;
       width: 86vw;
       padding: 20px;
       background: #f1f4f5;
-      transition: all .4s;
+      transition: all 0.4s;
     }
-    .container-fold{
+    .container-fold {
       position: relative;
       box-sizing: border-box;
       width: calc(100vw - 65px);
       padding: 20px;
       background: #f1f4f5;
-      transition: all .4s;
+      transition: all 0.4s;
     }
 
-    .container-wrapper{
+    .container-wrapper {
       position: absolute;
       top: 20px;
       left: 20px;

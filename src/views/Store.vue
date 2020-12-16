@@ -12,7 +12,7 @@
         <el-button type="primary" @click="showAddForm">新增</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" :disabled="this.selectRows.length===0" @click="clickDeleteAll">批量删除</el-button>
+        <el-button type="danger" :disabled="this.selectRows.length === 0" @click="clickDeleteAll">批量删除</el-button>
       </el-form-item>
     </el-form>
 
@@ -27,10 +27,10 @@
       <el-table-column prop="date" label="创建时间" width="200" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-        <el-button size="mini" type="primary" @click="clickSeeItem(scope.row, scope.$index)">查看</el-button>
-        <el-button size="mini" @click="clickEditItem(scope.row, scope.$index)">编辑</el-button>
-        <el-button size="mini" type="danger" @click="clickDeleteItem(scope.row, scope.$index)">删除</el-button>
-      </template>
+          <el-button size="mini" type="primary" @click="clickSeeItem(scope.row, scope.$index)">查看</el-button>
+          <el-button size="mini" @click="clickEditItem(scope.row, scope.$index)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="clickDeleteItem(scope.row, scope.$index)">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
 
@@ -43,7 +43,8 @@
         :page-sizes="[10, 20, 50, 100]"
         :page-size="pageSize"
         :total="totalItem"
-        layout="total, sizes, prev, pager, next, jumper">
+        layout="total, sizes, prev, pager, next, jumper"
+      >
       </el-pagination>
     </div>
 
@@ -67,7 +68,12 @@
           <el-input v-model="addForm.address"></el-input>
         </el-form-item>
         <el-form-item label="日期" prop="date">
-          <el-date-picker v-model="addForm.date" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+          <el-date-picker
+            v-model="addForm.date"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择日期"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -96,7 +102,12 @@
           <el-input v-model="editForm.address"></el-input>
         </el-form-item>
         <el-form-item label="日期" prop="date">
-          <el-date-picker v-model="editForm.date" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+          <el-date-picker
+            v-model="editForm.date"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择日期"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -125,7 +136,13 @@
           <el-input disabled v-model="seeForm.address"></el-input>
         </el-form-item>
         <el-form-item label="日期" prop="date">
-          <el-date-picker disabled v-model="seeForm.date" type="date" value-format="yyyy-MM-dd" placeholder="选择日期"></el-date-picker>
+          <el-date-picker
+            disabled
+            v-model="seeForm.date"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择日期"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -138,7 +155,7 @@
 </template>
 
 <script>
-import { getStoreList, saveStore, deleteStore, updateStore, getStoreDetail } from '@/ajax/api'
+import { getStoreList, saveStore, deleteStore, updateStore, getStoreDetail } from '@/ajax/api';
 export default {
   data() {
     return {
@@ -175,223 +192,237 @@ export default {
       pageIndex: 1, // 分页器上显示的当前页
       pageSize: 10, // 每一页的条数
       totalItem: 0 // 数据的总条数
-    }
+    };
   },
 
   computed: {
     // 将一些数据转换成用户可以懂的信息
     refactorTableData() {
-      let refactorData = []
+      let refactorData = [];
       this.tableData.forEach(value => {
-        let item = Object.assign({}, value)
-        item.date = value.date.substring(0, 10)
-        refactorData.push(item)
-      })
-      return refactorData
+        let item = Object.assign({}, value);
+        item.date = value.date.substring(0, 10);
+        refactorData.push(item);
+      });
+      return refactorData;
     }
   },
 
   created() {
-    this.initData()
+    this.initData();
   },
 
   methods: {
     // 初始化页面数据
     initData() {
-      console.log('init data')
-      getStoreList().then(response => {
-        this.$message.success(response.msg)
-        // 初始化所有数据
-        this.storeList = response.data
-        this.totalItem = this.storeList.length
-        this.tableData = this.storeList.slice(0, this.pageSize)
-        this.queryList = []
-        this.selectRows = []
-        this.pageIndex = 1
-      }).catch(err => {
-        err && this.$message.error(err.msg || err.message)
-      })
+      console.log('init data');
+      getStoreList()
+        .then(response => {
+          this.$message.success(response.msg);
+          // 初始化所有数据
+          this.storeList = response.data;
+          this.totalItem = this.storeList.length;
+          this.tableData = this.storeList.slice(0, this.pageSize);
+          this.queryList = [];
+          this.selectRows = [];
+          this.pageIndex = 1;
+        })
+        .catch(err => {
+          err && this.$message.error(err.msg || err.message);
+        });
     },
 
     // 查询店铺
     queryStore() {
-      console.log(this.filterForm.address)
-      let arr = this.storeList.filter((value, index) =>{
-        return value.address.includes(this.filterForm.address)
-      })
-      this.queryList = arr
-      this.tableData = this.queryList.slice(0, this.pageSize)
-      this.totalItem = this.queryList.length
-      this.pageIndex = 1
+      console.log(this.filterForm.address);
+      let arr = this.storeList.filter(value => {
+        return value.address.includes(this.filterForm.address);
+      });
+      this.queryList = arr;
+      this.tableData = this.queryList.slice(0, this.pageSize);
+      this.totalItem = this.queryList.length;
+      this.pageIndex = 1;
     },
 
     // 点击新增按钮，显示Form表单
     showAddForm() {
-      console.log('open add dialog')
-      this.addFormVisible = true
-      this.addForm = Object.assign({}, this.formTemplate)
+      console.log('open add dialog');
+      this.addFormVisible = true;
+      this.addForm = Object.assign({}, this.formTemplate);
     },
     // 点击取消按钮，关闭Form表单
     closeAddForm() {
-      console.log('close add')
+      console.log('close add');
       this.$confirm('确认放弃添加吗？', '提示', {}).then(() => {
-        this.addFormVisible = false
-      })
+        this.addFormVisible = false;
+      });
     },
     // 点击确定，增加店铺
     clickAddStore() {
-      console.log('add store')
-      console.log(this.addForm)
+      console.log('add store');
+      console.log(this.addForm);
       this.$confirm('确认提交吗？', '提示', {}).then(() => {
-        this.addStore(this.addForm)
-      })
+        this.addStore(this.addForm);
+      });
     },
     addStore(store) {
-      saveStore(store).then(response => {
-        this.$message.success(response.msg)
-        this.addFormVisible = false
-        this.initData()
-      }).catch(err => {
-        err && this.$message.error(err.msg || err.message)
-      })
+      saveStore(store)
+        .then(response => {
+          this.$message.success(response.msg);
+          this.addFormVisible = false;
+          this.initData();
+        })
+        .catch(err => {
+          err && this.$message.error(err.msg || err.message);
+        });
     },
 
     // 点击批量删除
     clickDeleteAll() {
-      console.log('delete all')
+      console.log('delete all');
       this.$confirm('确认删除选中记录吗？', '提示', {
         type: 'warning'
-      }).then(() => {
-        let ids = this.selectRows.map(value => {
-          return value.id
-        })
-        this.deleteStoreItem(ids)
-      }).catch(() => {})
-    },
-    deleteStoreItem(ids){
-      deleteStore({ orgIds: ids }).then(response => {
-        this.$message.success(response.msg)
-        this.initData()
-      }).catch(err => {
-        err && this.$message.error(err.msg || err.message)
       })
+        .then(() => {
+          let ids = this.selectRows.map(value => {
+            return value.id;
+          });
+          this.deleteStoreItem(ids);
+        })
+        .catch(() => {});
+    },
+    deleteStoreItem(ids) {
+      deleteStore({ orgIds: ids })
+        .then(response => {
+          this.$message.success(response.msg);
+          this.initData();
+        })
+        .catch(err => {
+          err && this.$message.error(err.msg || err.message);
+        });
     },
 
     // 在table中选择不同的行
     selectionChange(sels) {
-      console.log(sels)
+      console.log(sels);
       this.selectRows = sels;
     },
 
     // 在某一行点击查看
     clickSeeItem(row, index) {
-      console.log(index)
-      console.log(row)
-      getStoreDetail(row.id).then(response => {
-        this.$message.success(response.msg)
-        this.seeForm = response.data
-        this.seeFormVisible = true
-      }).catch(err => {
-        err && this.$message.error(err.msg || err.message)
-      })
+      console.log(index);
+      console.log(row);
+      getStoreDetail(row.id)
+        .then(response => {
+          this.$message.success(response.msg);
+          this.seeForm = response.data;
+          this.seeFormVisible = true;
+        })
+        .catch(err => {
+          err && this.$message.error(err.msg || err.message);
+        });
     },
     // 关闭详情页面
     closeSeeForm() {
-      console.log('close see form')
-      this.seeFormVisible = false
+      console.log('close see form');
+      this.seeFormVisible = false;
     },
     // 在详情页点击编辑
     clickEditInSeeForm() {
-      console.log('edit in see form')
-      this.seeFormVisible = false
-      this.clickEditItem(this.seeForm)
+      console.log('edit in see form');
+      this.seeFormVisible = false;
+      this.clickEditItem(this.seeForm);
     },
     // 在详情页点击删除
     clickDeleteInSeeForm() {
-      console.log('delete in see form')
-      this.seeFormVisible = false
-      this.clickDeleteItem(this.seeForm)
+      console.log('delete in see form');
+      this.seeFormVisible = false;
+      this.clickDeleteItem(this.seeForm);
     },
 
     // 在某一行点击编辑
     clickEditItem(row, index) {
-      console.log(index)
-      console.log(row)
+      console.log(index);
+      console.log(row);
       let editItem = this.tableData.filter(value => {
-        return value.id === row.id
-      })
-      this.editForm = Object.assign({}, this.formTemplate, editItem[0])
-      this.editFormVisible = true
+        return value.id === row.id;
+      });
+      this.editForm = Object.assign({}, this.formTemplate, editItem[0]);
+      this.editFormVisible = true;
     },
     // 关闭编辑页面
     closeEditForm() {
-      console.log('close edit form')
+      console.log('close edit form');
       this.$confirm('确认放弃修改吗？', '提示', {}).then(() => {
-        this.editFormVisible = false
-      })
+        this.editFormVisible = false;
+      });
     },
     // 编辑以后点击确定
     clickEditStore() {
-      console.log('edit store')
+      console.log('edit store');
       this.$confirm('确认提交吗？', '提示', {}).then(() => {
-        this.editStore(this.editForm)
-      })
+        this.editStore(this.editForm);
+      });
     },
     editStore(store) {
-      updateStore(store).then(response => {
-        this.$message.success(response.msg)
-        this.editFormVisible = false
-        this.initData()
-      }).catch(err => {
-        err && this.$message.error(err.msg || err.message)
-      })
+      updateStore(store)
+        .then(response => {
+          this.$message.success(response.msg);
+          this.editFormVisible = false;
+          this.initData();
+        })
+        .catch(err => {
+          err && this.$message.error(err.msg || err.message);
+        });
     },
 
     // 在某一行点击删除
     clickDeleteItem(row, index) {
-      console.log(index)
-      console.log(row)
+      console.log(index);
+      console.log(row);
       this.$confirm('确认删除选中记录吗？', '提示', {
         type: 'warning'
-      }).then(() => {
-        this.deleteStoreItem([row.id])
-      }).catch(() => {})
+      })
+        .then(() => {
+          this.deleteStoreItem([row.id]);
+        })
+        .catch(() => {});
     },
 
     // 改变每页的条数
-    sizeChangeHandle (val) {
-      console.log(val)
-      this.pageSize = val
-      this.pageIndex = 1
+    sizeChangeHandle(val) {
+      console.log(val);
+      this.pageSize = val;
+      this.pageIndex = 1;
 
       if (this.queryList.length > 0) {
-        this.tableData = this.queryList.slice(0, this.pageSize)
+        this.tableData = this.queryList.slice(0, this.pageSize);
       } else {
-        this.tableData = this.storeList.slice(0, this.pageSize)
+        this.tableData = this.storeList.slice(0, this.pageSize);
       }
     },
     // 改变当前页
-    currentChangeHandle (val) {
-      console.log(val)
-      this.pageIndex = val
-      let currentPageArrIndexStart = (val - 1) * this.pageSize
-      let currentPageArrIndexEnd = (val - 1) * this.pageSize + this.pageSize
+    currentChangeHandle(val) {
+      console.log(val);
+      this.pageIndex = val;
+      let currentPageArrIndexStart = (val - 1) * this.pageSize;
+      let currentPageArrIndexEnd = (val - 1) * this.pageSize + this.pageSize;
 
       if (this.queryList.length > 0) {
-        this.tableData = this.queryList.slice(currentPageArrIndexStart, currentPageArrIndexEnd)
+        this.tableData = this.queryList.slice(currentPageArrIndexStart, currentPageArrIndexEnd);
       } else {
-        this.tableData = this.storeList.slice(currentPageArrIndexStart, currentPageArrIndexEnd)
+        this.tableData = this.storeList.slice(currentPageArrIndexStart, currentPageArrIndexEnd);
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
 .store {
   padding: 20px;
 
-  .pagination{
+  .pagination {
     position: absolute;
     right: 0px;
     margin: 20px;

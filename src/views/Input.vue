@@ -26,18 +26,29 @@
       </el-form-item>
 
       <el-form-item label="地址" prop="address">
-        <el-cascader v-model="inputForm.address" :options="options" :props="{ expandTrigger: 'hover' }" @change="handleChange"></el-cascader>
+        <el-cascader
+          v-model="inputForm.address"
+          :options="options"
+          :props="{ expandTrigger: 'hover' }"
+          @change="handleChange"
+        ></el-cascader>
       </el-form-item>
 
       <el-form-item label="简介" prop="intro">
-        <el-input type="textarea" placeholder="请输入内容" v-model="inputForm.intro" maxlength="200" show-word-limit></el-input>
+        <el-input
+          type="textarea"
+          placeholder="请输入内容"
+          v-model="inputForm.intro"
+          maxlength="200"
+          show-word-limit
+        ></el-input>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { regionData } from 'element-china-area-data'
+import { regionData } from 'element-china-area-data';
 export default {
   data() {
     return {
@@ -50,20 +61,20 @@ export default {
         intro: ''
       },
       options: regionData
-    }
+    };
   },
 
   methods: {
     handleChange(value) {
-      console.log(value)
-      console.log(this.inputForm.address)
+      console.log(value);
+      console.log(this.inputForm.address);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-.input{
+.input {
   padding: 20px;
   width: 400px;
 }
