@@ -38,6 +38,12 @@ const dynamicRoutesMap = [
         meta: { icon: 'icon-edit', title: '文本编辑' }
       },
       {
+        path: '/user',
+        name: 'user',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
+        meta: { icon: 'icon-admin', title: '用户管理' }
+      },
+      {
         path: '/permission',
         name: 'permission',
         component: () => import(/* webpackChunkName: "permission" */ '@/views/Permission.vue'),
