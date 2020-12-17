@@ -29,7 +29,7 @@ const dynamicRoutesMap = [
         path: '/upload-export',
         name: 'upload-export',
         component: () => import(/* webpackChunkName: "upload-export" */ '@/views/UploadExport.vue'),
-        meta: { icon: 'icon-upload', title: '上传导出' }
+        meta: { icon: 'icon-upload', title: '导入导出' }
       },
       {
         path: '/editor',

@@ -1,7 +1,7 @@
 <template>
   <div class="table-grid">
     <div style="margin-bottom: 30px;">
-      <div>名称列宽度固定。 表格区域(包含分页)默认高度225px</div>
+      <div>表格列可配置。 表格区域(包含分页)默认高度225px</div>
       <table-content :columnList="tableFileds" :dataList="userList"> </table-content>
     </div>
 
