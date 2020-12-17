@@ -36,36 +36,13 @@ const dynamicRoutesMap = [
         name: 'editor',
         component: () => import(/* webpackChunkName: "editor" */ '@/views/Editor.vue'),
         meta: { icon: 'icon-edit', title: '文本编辑' }
+      },
+      {
+        path: '/permission',
+        name: 'permission',
+        component: () => import(/* webpackChunkName: "permission" */ '@/views/Permission.vue'),
+        meta: { icon: 'icon-xitongguanli', title: '权限管理' }
       }
-      // {
-      //   path: '/systemManagement', // 系统管理
-      //   name: 'systemManagement',
-      //   component: () => import(/* webpackChunkName: "parent" */ '@/views/Parent.vue'), // 为了使子路由可以显示，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
-      //   meta: { icon: 'icon-xitongguanli', title: '系统管理' },
-      //   children: [
-      //     {
-      //       path: '/userManagement',
-      //       name: 'userManagement',
-      //       component: () =>
-      //         import(/* webpackChunkName: "userManagement" */ '@/views/sys-management/UserManagement.vue'),
-      //       meta: { title: '用户管理' }
-      //     },
-      //     {
-      //       path: '/roleManagement',
-      //       name: 'roleManagement',
-      //       component: () =>
-      //         import(/* webpackChunkName: "roleManagement" */ '@/views/sys-management/RoleManagement.vue'),
-      //       meta: { title: '角色管理' }
-      //     },
-      //     {
-      //       path: '/permissionManagement',
-      //       name: 'permissionManagement',
-      //       component: () =>
-      //         import(/* webpackChunkName: "permissionManagement" */ '@/views/sys-management/PermissionManagement.vue'),
-      //       meta: { title: '权限管理' }
-      //     }
-      //   ]
-      // }
     ]
   }
 ];
