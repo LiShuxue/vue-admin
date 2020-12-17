@@ -1,12 +1,32 @@
 <template>
   <div class="table-content">
-    <div class="table" :style="wrapperStyle">
-      <div class="grid" :style="gridStyle">
-        <slot name="grid"></slot>
-      </div>
-      <div class="page">
-        <slot name="page"></slot>
-      </div>
+    <div class="grid">
+      <!-- 列表 -->
+      <el-table :data="tableData" style="width: 100%" height="100%" @selection-change="selectionChange" border>
+        <el-table-column
+          v-for="item in columnList"
+          :type="item.type"
+          :prop="item.field"
+          :label="item.headerName"
+          :align="item.align"
+          :width="item.width"
+          :key="item.key"
+        >
+        </el-table-column>
+        <slot name="ops-column"> </slot>
+      </el-table>
+    </div>
+    <div class="pagination">
+      <el-pagination
+        @size-change="sizeChangeHandle"
+        @current-change="currentChangeHandle"
+        :current-page="pageIndex"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="pageSize"
+        :total="totalItem"
+        layout="total, sizes, prev, pager, next"
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -14,45 +34,72 @@
 <script>
 export default {
   props: {
-    gridHeight: Number
+    columnList: Array, // 列
+    dataList: Array, // 后端返回的所有的list信息
+    height: Number
   },
 
-  computed: {
-    wrapperStyle() {
-      return this.gridHeight ? `height: ${this.gridHeight + 35}px;` : '';
+  data() {
+    return {
+      tableData: [], // 当前页面显示的table
+      pageIndex: 1, // 分页器上显示的当前页
+      pageSize: 10, // 每页的条数
+      totalItem: 0 // 数据的总条数
+    };
+  },
+
+  watch: {
+    dataList() {
+      this.initData();
+    }
+  },
+
+  methods: {
+    // 初始化所有数据
+    initData() {
+      this.totalItem = this.dataList.length;
+      this.tableData = this.dataList.slice(0, this.pageSize);
+      this.pageIndex = 1;
     },
-    gridStyle() {
-      return this.gridHeight ? `height: ${this.gridHeight}px;` : '';
+
+    // 改变每页的条数
+    sizeChangeHandle(val) {
+      this.pageSize = val;
+      this.pageIndex = 1;
+      this.tableData = this.dataList.slice(0, this.pageSize);
+    },
+    // 改变当前页
+    currentChangeHandle(val) {
+      this.pageIndex = val;
+      let currentPageArrIndexStart = (val - 1) * this.pageSize;
+      let currentPageArrIndexEnd = (val - 1) * this.pageSize + this.pageSize;
+      this.tableData = this.dataList.slice(currentPageArrIndexStart, currentPageArrIndexEnd);
+    },
+    // 在table中选择不同的行
+    selectionChange(sels) {
+      this.$emit('select', sels);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$table-height: 225px;
+$pagination-height: 35px;
+
 .table-content {
-  $table-height: 100%;
-
-  .table {
-    height: $table-height;
-    background: #fff;
-    .grid {
-      height: calc(#{$table-height} - #{$table-pagination-height});
-      // overflow-y: scroll; // 不再需要， 因为table设置了height 100% , 高度等于当前高度, 所以表头固定，表内滚动
-    }
+  position: relative;
+  background: white;
+  height: $table-height;
+  .grid {
+    height: calc(100% - #{$pagination-height});
   }
-  .page {
-    position: absolute;
-    width: 100%;
-    height: $table-pagination-height;
-    right: 0;
-    bottom: 0;
-    border-top: 1px solid rgba(144, 166, 193, 0.3);
 
-    /deep/ .el-pagination {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
+  .pagination {
+    position: absolute;
+    border-bottom: 0;
+    right: 0;
+    height: $pagination-height;
   }
 }
 </style>

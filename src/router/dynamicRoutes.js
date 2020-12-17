@@ -41,7 +41,7 @@ const dynamicRoutesMap = [
       //   path: '/systemManagement', // 系统管理
       //   name: 'systemManagement',
       //   component: () => import(/* webpackChunkName: "parent" */ '@/views/Parent.vue'), // 为了使子路由可以显示，里面只有一个router-view即可。如果子路由还有嵌套，需要同样操作。
-      //   meta: { icon: 'icon-sys', title: '系统管理' },
+      //   meta: { icon: 'icon-xitongguanli', title: '系统管理' },
       //   children: [
       //     {
       //       path: '/userManagement',
@@ -100,7 +100,7 @@ const filterRoutes = (routeList, permissionList) => {
 };
 
 const dynamicRoutes = () => {
-  const menuList = (store.state.loginResponse.user && store.state.loginResponse.user.menuList) || [];
+  const menuList = store.state.loginResponse.user.menuList || [];
   return filterRoutes(dynamicRoutesMap, menuList);
 };
 

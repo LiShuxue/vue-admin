@@ -11,7 +11,7 @@ import 'normalize.css';
 Vue.config.productionTip = false;
 
 Vue.prototype.hasPermission = permission => {
-  const permissionList = (store.state.loginResponse.user && store.state.loginResponse.user.permissionList) || [];
+  const permissionList = store.state.loginResponse.user.permissionList || [];
   if (permissionList.includes(permission)) {
     return true;
   }

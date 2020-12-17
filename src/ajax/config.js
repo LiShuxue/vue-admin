@@ -29,12 +29,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     hideLoading();
-    if (response.data && response.data.code !== 200) {
-      handleError(response.data);
-      return Promise.reject(response.data);
-    } else {
-      return response.data;
-    }
+    return response.data;
   },
   error => {
     handleError(error);
@@ -45,7 +40,7 @@ axios.interceptors.response.use(
 export const handleError = error => {
   hideLoading();
   if (!error.status) {
-    // 非http错误 1. js 异常 2. 后台返回接口报错
+    // 非http错误
     Message.error({
       showClose: true,
       message: error.message

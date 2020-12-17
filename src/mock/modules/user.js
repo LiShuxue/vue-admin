@@ -3,7 +3,7 @@ import API from '@/ajax/api';
 const Random = Mock.Random;
 
 var dataList = [];
-for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
+for (let i = 0; i < Math.floor(Math.random() * 100 + 1); i++) {
   dataList.push(
     Mock.mock({
       id: Random.integer(1, 5),
@@ -11,6 +11,7 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
       image: Random.image('375x120'),
       date: Random.datetime(),
       name: Random.cname(),
+      age: Random.integer(25, 50),
       company: '公司',
       category: ['分类1', '分类2'],
       'choose|1': ['choose1', 'choose2', 'choose3'],
@@ -21,12 +22,12 @@ for (let i = 0; i < Math.floor(Math.random() * 10 + 1); i++) {
   );
 }
 
-const list = {
-  url: API.requireAuth.list.url,
-  type: API.requireAuth.list.type,
+const userList = {
+  url: API.requireAuth.userList.url,
+  type: API.requireAuth.userList.type,
   data: dataList
 };
 
 export default {
-  list
+  userList
 };

@@ -1,7 +1,9 @@
 import Mock from 'mockjs';
 import common from './modules/common';
+import user from './modules/user';
 
 useMock(common);
+useMock(user);
 
 function useMock(modules) {
   for (let key in modules) {

@@ -7,8 +7,6 @@ const login = {
   url: API.notRequireAuth.login.url,
   type: API.notRequireAuth.login.type,
   data: {
-    msg: 'success',
-    code: 200,
     token: Random.string('abcdefghijklmnopqrstuvwxyz0123456789', 32),
     user: {
       id: 1,
@@ -33,11 +31,7 @@ const login = {
 // 退出
 const logout = {
   url: API.requireAuth.logout.url,
-  type: API.requireAuth.logout.type,
-  data: {
-    msg: 'success',
-    code: 200
-  }
+  type: API.requireAuth.logout.type
 };
 
 export default {

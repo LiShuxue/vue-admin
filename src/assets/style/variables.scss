@@ -32,9 +32,6 @@ $container-header2-width: $container-width;
 $container-header2-collapse-width: $container-collapse-width;
 $container-header2-height: 35px;
 
-// 阴影
-$common-box-shadow: 0 5px 5px rgba(144, 166, 193, 0.2);
-
 // container区域，宽高
 $container-wrapper-padding-left: 10px;
 $container-wrapper-padding-top: 15px;
@@ -52,6 +49,7 @@ $container-inner-width: calc(#{$container-wrapper-width} - (2 * #{$container-wra
 $container-inner-collapse-width: calc(#{$container-wrapper-collapse-width} - (2 * #{$container-wrapper-padding-left}));
 $container-inner-height: calc(#{$container-wrapper-height} - #{$container-wrapper-padding-top});
 
+// 阴影
+$common-box-shadow: 0 5px 5px rgba(144, 166, 193, 0.2);
+// 间距
 $common-margin: 7px;
-
-$table-pagination-height: 35px;
