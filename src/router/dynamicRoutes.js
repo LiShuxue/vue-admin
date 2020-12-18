@@ -38,16 +38,24 @@ const dynamicRoutesMap = [
         meta: { icon: 'icon-edit', title: '文本编辑' }
       },
       {
-        path: '/user',
-        name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
-        meta: { icon: 'icon-admin', title: '用户管理' }
-      },
-      {
-        path: '/permission',
-        name: 'permission',
-        component: () => import(/* webpackChunkName: "permission" */ '@/views/Permission.vue'),
-        meta: { icon: 'icon-xitongguanli', title: '权限管理' }
+        path: '/sys-manage', // 系统管理
+        name: 'sys-manage',
+        component: () => import(/* webpackChunkName: "parent" */ '@/views/Parent.vue'),
+        meta: { icon: 'icon-xitongguanli', title: '系统管理' },
+        children: [
+          {
+            path: '/user',
+            name: 'user',
+            component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
+            meta: { icon: 'icon-admin', title: '用户管理' }
+          },
+          {
+            path: '/permission',
+            name: 'permission',
+            component: () => import(/* webpackChunkName: "permission" */ '@/views/Permission.vue'),
+            meta: { icon: 'icon-xitongguanli', title: '权限管理' }
+          }
+        ]
       }
     ]
   }
