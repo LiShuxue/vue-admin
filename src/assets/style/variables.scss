@@ -10,7 +10,7 @@ $header-width: #{$app-width};
 
 // content 包含 菜单栏和内容栏
 $content-width: #{$app-width};
-$content-height: calc(100vh - #{$header-height});
+$content-height: calc(#{$app-height} - #{$header-height});
 
 // 菜单栏
 $side-bar-width: 14vw;
@@ -18,8 +18,8 @@ $side-bar-height: $content-height;
 $side-bar-collapse-width: 64px;
 
 // 菜单右侧内容区域
-$container-width: calc(100vw - #{$side-bar-width});
-$container-collapse-width: calc(100vw - #{$side-bar-collapse-width});
+$container-width: calc(#{$app-width} - #{$side-bar-width});
+$container-collapse-width: calc(#{$app-width} - #{$side-bar-collapse-width});
 $container-height: $content-height;
 
 // 面包屑高度
