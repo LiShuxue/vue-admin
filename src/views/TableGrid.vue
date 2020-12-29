@@ -115,7 +115,6 @@ export default {
 
 <style lang="scss" scoped>
 .table-grid {
-  height: 100%;
   .test {
     height: 180px;
   }

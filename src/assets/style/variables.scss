@@ -1,53 +1,35 @@
 /*主题宽高*/
 
 // 整个application
-$app-width: 100vw;
+$app-width: 70vw;
 $app-height: 100vh;
 
 // 最顶部header
-$header-height: 50px;
 $header-width: #{$app-width};
+$header-height: 50px;
 
-// content 包含 菜单栏和内容栏
-$content-width: #{$app-width};
-$content-height: calc(#{$app-height} - #{$header-height});
+// 横幅banner
+$banner-width: #{$app-width};
+$banner-height: calc(0.25 * #{$app-height});
 
 // 菜单栏
-$side-bar-width: 14vw;
-$side-bar-height: $content-height;
-$side-bar-collapse-width: 64px;
+$menu-width: #{$app-width};
+$menu-height: $header-height;
 
-// 菜单右侧内容区域
-$container-width: calc(#{$app-width} - #{$side-bar-width});
-$container-collapse-width: calc(#{$app-width} - #{$side-bar-collapse-width});
-$container-height: $content-height;
-
-// 面包屑高度
-$container-header1-width: $container-width;
-$container-header1-collapse-width: $container-collapse-width;
-$container-header1-height: 50px;
-
-// 标签栏高度
-$container-header2-width: $container-width;
-$container-header2-collapse-width: $container-collapse-width;
-$container-header2-height: 35px;
+// footer
+$footer-width: #{$app-width};
+$footer-height: 35px;
 
 // container区域，宽高
-$container-wrapper-padding-left: 10px;
-$container-wrapper-padding-top: 15px;
-$container-wrapper-margin-bottom: 10px;
-$container-wrapper-padding: $container-wrapper-padding-top $container-wrapper-padding-left 0
-  $container-wrapper-padding-left;
-$container-wrapper-width: $container-width;
-$container-wrapper-collapse-width: $container-collapse-width;
+$container-wrapper-width: #{$app-width};
 $container-wrapper-height: calc(
-  #{$container-height} - #{$container-header1-height} - #{$container-header2-height} - #{$container-wrapper-margin-bottom}
+  #{$app-height} - #{$header-height} - #{$banner-height} - #{$menu-height} - #{$footer-height}
 );
+$container-wrapper-padding: 15px;
 
 // 真正的路由内容区域，宽高
-$container-inner-width: calc(#{$container-wrapper-width} - (2 * #{$container-wrapper-padding-left}));
-$container-inner-collapse-width: calc(#{$container-wrapper-collapse-width} - (2 * #{$container-wrapper-padding-left}));
-$container-inner-height: calc(#{$container-wrapper-height} - #{$container-wrapper-padding-top});
+$container-inner-width: calc(#{$container-wrapper-width} - (2 * #{$container-wrapper-padding}));
+$container-inner-height: calc(#{$container-wrapper-height} - (2 * #{$container-wrapper-padding}));
 
 // 阴影
 $common-box-shadow: 0 5px 5px rgba(144, 166, 193, 0.2);

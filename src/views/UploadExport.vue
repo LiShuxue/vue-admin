@@ -148,7 +148,6 @@ export default {
 
 <style lang="scss" scoped>
 .upload-export {
-  height: 100%;
   .export {
     margin-bottom: 30px;
   }

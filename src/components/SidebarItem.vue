@@ -1,12 +1,12 @@
 <template>
   <el-menu-item :index="item.name" v-if="!item.children">
-    <i v-if="item.meta && item.meta.icon" class="iconfont" :class="item.meta.icon"></i>
+    <!-- <i v-if="item.meta && item.meta.icon" class="iconfont" :class="item.meta.icon"></i> -->
     <span v-if="item.meta && item.meta.title" slot="title">{{ item.meta.title }}</span>
   </el-menu-item>
 
   <el-submenu :index="item.name" v-else>
     <template slot="title">
-      <i v-if="item.meta && item.meta.icon" class="iconfont" :class="item.meta.icon"></i>
+      <!-- <i v-if="item.meta && item.meta.icon" class="iconfont" :class="item.meta.icon"></i> -->
       <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
     </template>
 

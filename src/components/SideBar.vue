@@ -1,12 +1,11 @@
 <template>
   <el-menu
     :default-active="$route.name"
-    :collapse="isCollapse"
+    mode="horizontal"
     @select="handleSelect"
-    background-color="rgb(22, 87, 155)"
-    text-color="#fff"
-    active-text-color="#fff"
-    class="menu-bar"
+    background-color="#fff"
+    text-color="#000"
+    active-text-color="#fe7c7f"
   >
     <sidebar-item v-for="item in availableRoutes" :key="item.path" :item="item" />
   </el-menu>
@@ -17,13 +16,6 @@ import { mapState } from 'vuex';
 import SidebarItem from '@/components/SidebarItem';
 
 export default {
-  props: {
-    isCollapse: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   components: {
     SidebarItem
   },
@@ -45,30 +37,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-bar {
-  height: $side-bar-height;
-  overflow-y: scroll;
-  transition: all 0s;
-  .el-menu-item {
-    overflow: hidden;
-  }
-}
-.menu-bar:not(.el-menu--collapse) {
-  width: $side-bar-width;
+.el-menu.el-menu--horizontal {
+  border-bottom: none !important;
 }
 /deep/ .el-menu-item,
 /deep/ .el-submenu__title {
-  height: 44px !important;
-  line-height: 44px !important;
-}
-/deep/ .el-submenu .el-menu-item {
-  min-width: 0 !important;
+  height: $menu-height !important;
+  line-height: $menu-height !important;
+  border-bottom: none !important;
 }
 /deep/ .el-menu-item.is-active {
-  background-color: rgb(10, 44, 74) !important;
+  background-color: #f1f4f5 !important;
+  border-bottom: none !important;
 }
 /deep/ .el-menu-item:hover,
 /deep/ .el-submenu__title:hover {
-  background-color: rgb(10, 44, 74) !important;
+  background-color: #f1f4f5 !important;
 }
 </style>

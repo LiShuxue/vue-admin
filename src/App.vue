@@ -16,6 +16,7 @@
 
 #app {
   position: relative;
+  margin: 0 auto;
   width: $app-width;
   height: $app-height;
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial,
