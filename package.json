@@ -9,7 +9,10 @@
     "build-mock": "vue-cli-service build --mode mock",
     "build-sit": "vue-cli-service build --mode sit",
     "build-prod": "vue-cli-service build --mode prod",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start-mock": "yarn lint && yarn mock",
+    "start-sit": "yarn lint && yarn sit",
+    "start-prod": "yarn lint && yarn prod"
   },
   "husky": {
     "hooks": {
