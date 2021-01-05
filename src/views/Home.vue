@@ -39,6 +39,7 @@
           </div>
         </div>
         <div class="container-wrapper">
+          <!-- key是为了点击菜单强制刷新路由-->
           <router-view :key="$route.path + $route.query.t"></router-view>
         </div>
       </div>

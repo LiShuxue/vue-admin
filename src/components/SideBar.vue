@@ -38,6 +38,7 @@ export default {
 
   methods: {
     handleSelect(key) {
+      // 点击菜单强制刷新路由
       this.$router.push({
         path: key,
         query: {
