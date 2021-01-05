@@ -30,7 +30,13 @@ export default {
 
   methods: {
     handleSelect(key) {
-      this.$router.push(key);
+      // 点击菜单强制刷新路由
+      this.$router.push({
+        path: key,
+        query: {
+          t: Date.now()
+        }
+      });
     }
   }
 };
