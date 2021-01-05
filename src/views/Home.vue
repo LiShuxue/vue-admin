@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="container-wrapper">
-          <router-view />
+          <router-view :key="$route.path + $route.query.t"></router-view>
         </div>
       </div>
     </div>

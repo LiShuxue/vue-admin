@@ -38,7 +38,12 @@ export default {
 
   methods: {
     handleSelect(key) {
-      this.$router.push(key);
+      this.$router.push({
+        path: key,
+        query: {
+          t: Date.now()
+        }
+      });
     }
   }
 };
