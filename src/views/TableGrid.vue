@@ -6,19 +6,13 @@
     </div>
 
     <div style="margin-bottom: 30px;">
-      <div>带选择框， 列宽度自适应。 表格区域(包含分页)高度由当前的class决定</div>
-      <table-content
-        :columnList="tableFiledsWithSelect"
-        :dataList="userList"
-        :height="300"
-        @select="onSelectChange"
-        class="test"
-      >
+      <div>带选择框， 列宽度自适应。 表格区域(包含分页)高度由当前的class "test" 决定</div>
+      <table-content :columnList="tableFiledsWithSelect" :dataList="userList" @select="onSelectChange" class="test">
       </table-content>
     </div>
 
-    <div>带操作列</div>
-    <table-content :columnList="tableFiledsWithAutoWidth" :dataList="userList">
+    <div>带操作列，表格区域(包含分页)高度由参数height自定义</div>
+    <table-content :columnList="tableFiledsWithAutoWidth" :dataList="userList" :height="300">
       <template v-slot:ops-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
