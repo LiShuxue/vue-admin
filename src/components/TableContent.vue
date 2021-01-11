@@ -1,5 +1,5 @@
 <template>
-  <div class="table-content">
+  <div class="table-content" :style="styleVar">
     <div class="grid">
       <!-- 列表 -->
       <el-table :data="tableData" style="width: 100%" height="100%" @selection-change="selectionChange" border>
@@ -36,7 +36,18 @@ export default {
   props: {
     columnList: Array, // 列
     dataList: Array, // 后端返回的所有的list信息
-    height: Number
+    height: {
+      type: Number,
+      default: 225
+    }
+  },
+
+  computed: {
+    styleVar() {
+      return {
+        '--table-content-height': this.height + 'px'
+      };
+    }
   },
 
   data() {
@@ -84,7 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$table-height: 225px;
+$table-height: var(--table-content-height);
 $pagination-height: 35px;
 
 .table-content {
