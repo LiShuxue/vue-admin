@@ -1,8 +1,23 @@
 /*主题宽高*/
 
+// 定义成css变量，这样定义可以在别处切换变量值，来动态实现主题切换
+// 如在 App.vue 中 覆盖
+/*
+@media screen and (max-device-width: 1280px) {
+  :root {
+    --app-width: 100vw;
+    --app-height: 100vh;
+  }
+}
+*/
+:root {
+  --app-width: 100vw;
+  --app-height: 100vh;
+}
+
 // 整个application
-$app-width: 100vw;
-$app-height: 100vh;
+$app-width: var(--app-width);
+$app-height: var(--app-width);
 
 // 最顶部header
 $header-height: 50px;
