@@ -3,16 +3,7 @@
     <div class="grid">
       <!-- 列表 -->
       <el-table :data="tableData" style="width: 100%" height="100%" @selection-change="selectionChange" border>
-        <el-table-column
-          v-for="item in columnList"
-          :type="item.type"
-          :prop="item.field"
-          :label="item.headerName"
-          :align="item.align"
-          :width="item.width"
-          :key="item.key"
-        >
-        </el-table-column>
+        <el-table-column v-for="item in columnList" v-bind="item" :key="item.key"> </el-table-column>
         <slot name="ops-column"> </slot>
       </el-table>
     </div>

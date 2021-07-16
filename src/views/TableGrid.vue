@@ -33,14 +33,14 @@ export default {
     return {
       tableFileds: [
         {
-          field: 'name',
-          headerName: '名称',
+          prop: 'name',
+          label: '名称',
           width: '200',
           align: 'center'
         },
         {
-          field: 'age',
-          headerName: '年龄',
+          prop: 'age',
+          label: '年龄',
           width: '',
           align: 'center'
         }
@@ -52,14 +52,14 @@ export default {
           width: '100'
         },
         {
-          field: 'name',
-          headerName: '名称',
+          prop: 'name',
+          label: '名称',
           width: '',
           align: 'center'
         },
         {
-          field: 'age',
-          headerName: '年龄',
+          prop: 'age',
+          label: '年龄',
           width: '',
           align: 'center'
         }
@@ -67,14 +67,14 @@ export default {
 
       tableFiledsWithAutoWidth: [
         {
-          field: 'name',
-          headerName: '名称',
+          prop: 'name',
+          label: '名称',
           width: '',
           align: 'center'
         },
         {
-          field: 'age',
-          headerName: '年龄',
+          prop: 'age',
+          label: '年龄',
           width: '',
           align: 'center'
         }
