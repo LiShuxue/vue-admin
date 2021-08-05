@@ -13,28 +13,11 @@ jobs:
     runs-on: ubuntu-latest # 运行环境，最新ubuntu
 
     steps:
-      - name: Checkout # check out the repository
-        uses: actions/checkout@v2 # 这里使用了github官方提供的action,checkout项目到虚拟机上
-
-      - name: Install Dependencies # 安装依赖
-        run: yarn
-
-      - name: Build # 构建
-        run: yarn build-prod
-
-      - name: Upload build file to server # 部署
-        uses: appleboy/scp-action@master # 使用第三方action 上传静态文件到服务器
-        env:
-          host: ${{ secrets.SERVER_IP }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'dist'
-          target: '/root/project/vue-admin' # 代码部署路径
-
       - name: Nginx reload # 重启nginx
         uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
         with:
           command: nginx -s reload
           username: root
-          host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          env:
+            host: ${{ secrets.SERVER_IP }}
+            privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
