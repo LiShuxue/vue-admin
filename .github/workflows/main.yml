@@ -23,7 +23,7 @@ jobs:
         run: yarn build-prod
 
       - name: Clean remote folder # 删除远程的代码
-        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        uses: garygrossgarten/github-action-ssh@master # 使用第三方action 远程执行命令
         with:
           command: rm -rf /root/project/vue-admin/dist
           username: root
@@ -40,7 +40,7 @@ jobs:
           target: '/root/project/vue-admin' # 代码部署路径
 
       - name: Nginx reload # 重启nginx
-        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
+        uses: garygrossgarten/github-action-ssh@master # 使用第三方action 远程执行命令
         with:
           command: nginx -s reload
           username: root
