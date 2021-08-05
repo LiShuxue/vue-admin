@@ -22,14 +22,6 @@ jobs:
       - name: Build # 构建
         run: yarn build-prod
 
-      - name: Clean remote folder # 删除远程的代码
-        uses: garygrossgarten/github-action-ssh@release # 使用第三方action 远程执行命令
-        with:
-          command: rm -rf /root/project/vue-admin/dist
-          username: root
-          host: ${{ secrets.SERVER_IP }}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
-
       - name: Upload build file to server # 部署
         uses: appleboy/scp-action@master # 使用第三方action 上传静态文件到服务器
         with:
