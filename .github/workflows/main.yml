@@ -29,7 +29,6 @@ jobs:
           username: root
           host: ${{ secrets.SERVER_IP }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
-          tryKeyboard: true
 
       - name: Upload build file to server # 部署
         uses: appleboy/scp-action@master # 使用第三方action 上传静态文件到服务器
@@ -47,4 +46,3 @@ jobs:
           username: root
           host: ${{ secrets.SERVER_IP }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          tryKeyboard: true
