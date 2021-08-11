@@ -62,19 +62,19 @@ export default {
 .menu-bar:not(.el-menu--collapse) {
   width: $side-bar-width;
 }
-/deep/ .el-menu-item,
-/deep/ .el-submenu__title {
+::v-deep .el-menu-item,
+::v-deep .el-submenu__title {
   height: 44px !important;
   line-height: 44px !important;
 }
-/deep/ .el-submenu .el-menu-item {
+::v-deep .el-submenu .el-menu-item {
   min-width: 0 !important;
 }
-/deep/ .el-menu-item.is-active {
+::v-deep .el-menu-item.is-active {
   background-color: rgb(10, 44, 74) !important;
 }
-/deep/ .el-menu-item:hover,
-/deep/ .el-submenu__title:hover {
+::v-deep .el-menu-item:hover,
+::v-deep .el-submenu__title:hover {
   background-color: rgb(10, 44, 74) !important;
 }
 </style>

@@ -253,7 +253,7 @@ export default {
         .my-tab.choose {
           background: rgba(58, 142, 230, 1);
         }
-        .my-tab /deep/ .el-icon-close {
+        .my-tab ::v-deep .el-icon-close {
           color: white;
         }
       }

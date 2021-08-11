@@ -175,7 +175,7 @@ export default {
         padding-top: $transfer-parent-padding;
       }
 
-      /deep/ .el-transfer {
+      ::v-deep .el-transfer {
         display: flex;
         padding-bottom: $transfer-parent-padding;
         .el-transfer-panel {

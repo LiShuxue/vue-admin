@@ -26,6 +26,7 @@ module.exports = {
     loaderOptions: {
       // 引入全局的scss
       scss: {
+        implementation: require('sass'),
         additionalData: `@import "~@/assets/style/base.scss";`
       }
     }
