@@ -46,18 +46,18 @@ export default {
 .el-menu.el-menu--horizontal {
   border-bottom: none !important;
 }
-/deep/ .el-menu-item,
-/deep/ .el-submenu__title {
+::v-deep .el-menu-item,
+::v-deep .el-submenu__title {
   height: $menu-height !important;
   line-height: $menu-height !important;
   border-bottom: none !important;
 }
-/deep/ .el-menu-item.is-active {
+::v-deep .el-menu-item.is-active {
   background-color: #f1f4f5 !important;
   border-bottom: none !important;
 }
-/deep/ .el-menu-item:hover,
-/deep/ .el-submenu__title:hover {
+::v-deep .el-menu-item:hover,
+::v-deep .el-submenu__title:hover {
   background-color: #f1f4f5 !important;
 }
 </style>
